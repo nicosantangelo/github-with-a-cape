@@ -54,12 +54,11 @@
       diffbar.insertBefore(diffbarItem, diffbar.firstChild)
 
       document.addEventListener('scroll', function() {
-        let currentBlob = firstInViewport(blobs)
-
-        if (currentBlob) {
-          let currentHeader = prevByClass(currentBlob, 'file-header')
-          let currentFile = currentHeader.querySelector('.user-select-contain').innerHTML
-          diffbarItem.innerHTML = currentFile
+        let index = firstIndexInViewport(blobs)
+        let currentHeader = headers[index]
+        
+        if (currentHeader) {
+          diffbarItem.innerHTML = currentHeader.dataset.path
         }
       })
     }
@@ -85,10 +84,10 @@
     }
   }
 
-  function firstInViewport(els) {
+  function firstIndexInViewport(els) {
     for(let i = 0; i < els.length; i++) {
       if (inViewport(els[i])) {
-        return els[i]
+        return i
       }
     }
   }
