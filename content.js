@@ -39,6 +39,27 @@
         code.classList.toggle('hidden')
       }
     }
+
+    // -----------------------------------------------------------------------------
+    // Current code file name on sticky bar
+    let prtoolbar = document.querySelector('.pr-toolbar.js-sticky')
+
+    if (prtoolbar) {
+      let diffbar = prtoolbar.querySelector('.diffbar')
+      let diffbarItem = document.createElement('div')
+      let headers = document.querySelectorAll('.file-header')
+
+      diffbarItem.className = 'diffbar-item'
+      diffbar.insertBefore(diffbarItem, diffbar.firstChild)
+
+      document.addEventListener('scroll', function() {
+        let currentHeader = firstInViewport(headers)
+        if (currentHeader) {
+          let currentFile = currentHeader.querySelector('.user-select-contain').innerHTML
+          diffbarItem.innerHTML = currentFile
+        }
+      })
+    }
   }
 
 
@@ -51,6 +72,22 @@
         return node
       }
     }
+  }
+
+  function firstInViewport(els) {
+    for(let i = 0; i < els.length; i++) {
+      if (inViewport(els[i])) {
+        return els[i]
+      }
+    }
+  }
+
+  function inViewport(el) {
+    let rect = el.getBoundingClientRect()
+    let windowHeight = (window.innerHeight || document.documentElement.clientHeight)
+    let windowWidth  = (window.innerWidth || document.documentElement.clientWidth)
+
+    return rect.top >= 0 && rect.left >= 0 && rect.bottom <= windowHeight && rect.right <= windowWidth
   }
 
 })()
