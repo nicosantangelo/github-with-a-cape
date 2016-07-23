@@ -1,0 +1,11 @@
+{
+  "name": "GitHub suite",
+  "version": "1.0.0",
+  "description": "A bunch of useful additions to the GitHub UI",
+  "main": "content.js",
+  "author": "Nicolás Santángelo",
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
