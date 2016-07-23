@@ -44,17 +44,20 @@
     // Current code file name on sticky bar
     let prtoolbar = document.querySelector('.pr-toolbar.js-sticky')
 
+    // Add the first file name at start
     if (prtoolbar) {
       let diffbar = prtoolbar.querySelector('.diffbar')
       let diffbarItem = document.createElement('div')
-      let headers = document.querySelectorAll('.file-header')
+      let blobs = document.querySelectorAll('.blob-wrapper')
 
       diffbarItem.className = 'diffbar-item'
       diffbar.insertBefore(diffbarItem, diffbar.firstChild)
 
       document.addEventListener('scroll', function() {
-        let currentHeader = firstInViewport(headers)
-        if (currentHeader) {
+        let currentBlob = firstInViewport(blobs)
+
+        if (currentBlob) {
+          let currentHeader = prevByClass(currentBlob, 'file-header')
           let currentFile = currentHeader.querySelector('.user-select-contain').innerHTML
           diffbarItem.innerHTML = currentFile
         }
@@ -66,8 +69,16 @@
   // -----------------------------------------------------------------------------
   // Utils
 
+  function prevByClass(node, className) {
+    return findSibling(node, 'previous', className)
+  }
+
   function nextByClass(node, className) {
-    while (node = node.nextSibling) {
+    return findSibling(node, 'next', className)
+  }
+
+  function findSibling(node, direction, className) {
+    while (node = node[direction + 'Sibling']) {
       if (node.classList && node.classList.contains(className)) {
         return node
       }
@@ -84,10 +95,8 @@
 
   function inViewport(el) {
     let rect = el.getBoundingClientRect()
-    let windowHeight = (window.innerHeight || document.documentElement.clientHeight)
-    let windowWidth  = (window.innerWidth || document.documentElement.clientWidth)
-
-    return rect.top >= 0 && rect.left >= 0 && rect.bottom <= windowHeight && rect.right <= windowWidth
+    let windowHeight = window.innerHeight || document.documentElement.clientHeight
+    return rect.top <= windowHeight && (rect.top + rect.height) >= 0
   }
 
 })()
