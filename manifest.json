@@ -19,6 +19,10 @@
       "run_at": "document_idle"
     }
   ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "options_page": "options/options.html",
   "permissions": [],
   "web_accessible_resources": []
