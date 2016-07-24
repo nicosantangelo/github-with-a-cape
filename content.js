@@ -27,7 +27,7 @@
     // Collapse diffs
 
     let headers = document.querySelectorAll('.file-header')
-
+    // TODO: Collapse ALL
     for(let i = 0; i < headers.length; i++) {
       headers[i].addEventListener('click', togglePanel)
       headers[i].style.cursor = 'pointer'
@@ -44,14 +44,18 @@
     // Current code file name on sticky bar
     let prtoolbar = document.querySelector('.pr-toolbar.js-sticky')
 
-    // Add the first file name at start
+    // TODO: Add the first file name at start
     if (prtoolbar) {
       let diffbar = prtoolbar.querySelector('.diffbar')
-      let diffbarItem = document.createElement('div')
       let blobs = document.querySelectorAll('.blob-wrapper')
 
-      diffbarItem.className = 'diffbar-item'
-      diffbar.insertBefore(diffbarItem, diffbar.firstChild)
+      let diffbarItem = document.getElementById('__github-suite-current-file')
+      if (! diffbarItem) {
+        diffbarItem = document.createElement('div')
+        diffbarItem.id = '__github-suite-current-file'
+        diffbarItem.className = 'diffbar-item'
+        diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
+      }
 
       document.addEventListener('scroll', function() {
         let index = firstIndexInViewport(blobs)
