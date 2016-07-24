@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>GitHub suite options</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="options.css">
+</head>
+<body>
+
+  <header>
+    <h1>GitHub suite - Options</h1>
+  </header>
+
+  <div class="configuration">
+    <div id="first-use-notice" class="first-use notice hidden">
+      <span class="close-notice">x</span>
+      Hey there!, thanks for trying the extension out.
+      <br />
+      Be sure to enable all the options you'd like to use and save the changes.
+    </div>
+
+    <div class="option">
+      <input type="checkbox" name="show-outdated-comments" id="show-outdated-comments">
+      Show outdated diffs comments by default
+    </div>
+    <div class="option">
+      <input type="checkbox" name="show-current-diff-file-name" id="show-current-diff-file-name">
+      Show the current diff name on the sticky header
+    </div>
+    <div class="option">
+      <input type="checkbox" name="collapsable-diffs" id="collapsable-diffs">
+      Add collapsable diffs
+    </div>
+
+    <br />
+
+    <div id="save" class="btn btn-primary">Save changes</div>
+
+    <br /> <br />
+
+    <div id="notice" class="notice hidden">
+      <span class="close-notice">x</span>
+      Options saved! Reload your GitHub tabs to see the changes.
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
