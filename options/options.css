@@ -32,11 +32,15 @@ header {
   color: #246;
   background-color: #E2EEF9;
   border: 1px solid #BAC6D3;
-  font-weight: bold;
 }
-.notice.first-use {
+
+.first-use-notice {
+  padding: 10px;
   margin-top: 0;
   margin-bottom: 30px;
+  color: #666;
+  background-color: #FCFCFC;
+  border: 1px solid #D5D5D5;
 }
 
 span.close-notice {

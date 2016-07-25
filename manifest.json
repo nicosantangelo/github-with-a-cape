@@ -24,6 +24,6 @@
     "persistent": false
   },
   "options_page": "options/options.html",
-  "permissions": [],
+  "permissions": ["storage"],
   "web_accessible_resources": []
 }

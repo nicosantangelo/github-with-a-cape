@@ -1,56 +1,36 @@
 (function() {
   var DEFAULT_CONFIGURATION = {
-    SHOW_OUTDATED_COMMENTS: false,
-    SHOW_CURRENT_DIFF_NAME: false,
-    COLLAPSABLE_DIFFS     : false
+    SHOW_OUTDATED_COMMENTS: true,
+    SHOW_CURRENT_FILE_NAME: true,
+    COLLAPSABLE_DIFFS     : true
   }
 
   var showOutdatedCommentsEl    = document.getElementById('show-outdated-comments')
   var showCurrentDiffFileNameEl = document.getElementById('show-current-diff-file-name')
   var collapsableDiffsEl        = document.getElementById('collapsable-diffs')
 
+  var notice = document.getElementById('notice')
+
   var saveTimeout
 
-  function save() {
+  // -----------------------------------------------------------------------------
+  // Events
+
+  document.getElementById('save').addEventListener('click', function save() {
     var configuration = {
       SHOW_OUTDATED_COMMENTS: showOutdatedCommentsEl.checked,
-      SHOW_CURRENT_DIFF_NAME: showCurrentDiffFileNameEl.checked,
+      SHOW_CURRENT_FILE_NAME: showCurrentDiffFileNameEl.checked,
       COLLAPSABLE_DIFFS     : collapsableDiffsEl.checked
     }
 
-    localStorage["configuration"] = JSON.stringify(configuration)
+    console.log(configuration)
 
-    var notice = document.getElementById('notice')
-    notice.classList.remove('hidden')
-
-    clearTimeout(saveTimeout)
-    saveTimeout = setTimeout(function () {
-      notice.classList.add('hidden')
-    }, 10000)
-  }
-
-  function loadCurrentOptions() {
-    var configuration = {}
-
-    try {
-      configuration = Object.assign({}, DEFAULT_CONFIGURATION, JSON.parse(localStorage["configuration"]))
-    }
-    catch (err) {
-      console.warn("Problem loading saved configuration: " + err)
-      configuration = DEFAULT_CONFIGURATION
-    }
-
-    showOutdatedCommentsEl.checked    = configuration.SHOW_OUTDATED_COMMENTS
-    showCurrentDiffFileNameEl.checked = configuration.SHOW_CURRENT_DIFF_NAME
-    collapsableDiffsEl.checked        = configuration.COLLAPSABLE_DIFFS
-  }
-
-  if (! localStorage["hideFirstUseNotice"]) {
-    document.getElementById('first-use-notice').classList.remove('hidden')
-    localStorage["hideFirstUseNotice"] = true
-  }
-
-  document.getElementById('save').addEventListener('click', save, false)
+    chrome.storage.sync.set(configuration, function() {
+      notice.classList.remove('hidden')
+      clearTimeout(saveTimeout)
+      saveTimeout = setTimeout(function () { notice.classList.add('hidden') }, 4000)
+    })
+  }, false)
 
   var closeButtons = document.getElementsByClassName('close-notice')
   Array.prototype.forEach.call(closeButtons, function(closeButton) {
@@ -58,5 +38,21 @@
       closeButton.parentElement.classList.add('hidden')
     }, false)
   })
-  loadCurrentOptions()
+
+
+  // -----------------------------------------------------------------------------
+  // Start
+
+  chrome.storage.local.get({ justUpdated: false }, function(items) {
+    if (items.justUpdated) {
+      document.getElementById('first-use-notice').classList.remove('hidden')
+      chrome.storage.local.remove('justUpdated')
+    }
+  })
+
+  chrome.storage.sync.get(DEFAULT_CONFIGURATION, function(configuration) {
+    showOutdatedCommentsEl.checked    = configuration.SHOW_OUTDATED_COMMENTS
+    showCurrentDiffFileNameEl.checked = configuration.SHOW_CURRENT_FILE_NAME
+    collapsableDiffsEl.checked        = configuration.COLLAPSABLE_DIFFS
+  })
 })()
