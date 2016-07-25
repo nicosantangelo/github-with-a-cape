@@ -24,12 +24,17 @@
     if (configuration.COLLAPSABLE_DIFFS) {
       collapsableDiffs()
     }
+
+    if (configuration.SHOW_ALL_HIDE_ALL_BUTTONS) {
+      showHideAllButtons()
+    }
   }
 
   chrome.storage.sync.get({
-    SHOW_OUTDATED_COMMENTS: true,
-    SHOW_CURRENT_FILE_NAME: true,
-    COLLAPSABLE_DIFFS     : true
+    SHOW_OUTDATED_COMMENTS   : true,
+    SHOW_CURRENT_FILE_NAME   : true,
+    COLLAPSABLE_DIFFS        : true,
+    SHOW_ALL_HIDE_ALL_BUTTONS: true
   }, function (items) {
     configuration = items
     main()
@@ -50,25 +55,6 @@
 
     for(var i = 0; i < outdatedDiffs.length; i++) {
       outdatedDiffs[i].classList.add('open')
-    }
-  }
-
-  
-  function collapsableDiffs() {
-    var headers = document.getElementsByClassName('file-header')
-
-    // TODO: Collapse ALL button
-
-    for(var i = 0; i < headers.length; i++) {
-      headers[i].addEventListener('click', togglePanel)
-      headers[i].style.cursor = 'pointer'
-    }
-
-    function togglePanel() {
-      var code = nextByClass(this, 'blob-wrapper')
-      if (code) {
-        code.classList.toggle('hidden')
-      }
     }
   }
 
@@ -102,6 +88,52 @@
       if (currentHeader) {
         diffbarItem.innerHTML = currentHeader.dataset.path
       }
+    }
+  }
+
+  
+  function collapsableDiffs() {
+    var headers = document.getElementsByClassName('file-header')
+
+    for(var i = 0; i < headers.length; i++) {
+      headers[i].addEventListener('click', togglePanel)
+      headers[i].style.cursor = 'pointer'
+    }
+
+    function togglePanel() {
+      var code = nextByClass(this, 'blob-wrapper')
+      if (code) {
+        code.classList.toggle('hidden')
+      }
+    }
+  }
+
+
+  function showHideAllButtons() {
+    var actions = document.querySelector('.pr-toolbar.js-sticky .float-right')
+
+    if (actions) {
+      var headers = Array.prototype.slice.call(document.getElementsByClassName('file-header'))
+
+      var showAll = document.createElement('button')
+      showAll.innerHTML = 'Show all'
+      showAll.className = 'diffbar-item btn-link muted-link'
+      showAll.onclick = function () { changeHadersVisibillity('remove') }
+
+      var hideAll = document.createElement('button')
+      hideAll.innerHTML = 'Hide all'
+      hideAll.className = 'diffbar-item btn-link muted-link'
+      hideAll.onclick = function () { changeHadersVisibillity('add') } // This will potentially break the filename
+
+      actions.appendChild(showAll)
+      actions.appendChild(hideAll)
+    }
+
+    function changeHadersVisibillity(method) {
+      headers.forEach(function (header) {
+        var code = nextByClass(header, 'blob-wrapper')
+        if (code) code.classList[method]('hidden')
+      })
     }
   }
 

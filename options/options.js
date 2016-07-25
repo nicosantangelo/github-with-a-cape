@@ -1,13 +1,15 @@
 (function() {
   var DEFAULT_CONFIGURATION = {
-    SHOW_OUTDATED_COMMENTS: true,
-    SHOW_CURRENT_FILE_NAME: true,
-    COLLAPSABLE_DIFFS     : true
+    SHOW_OUTDATED_COMMENTS   : true,
+    SHOW_CURRENT_FILE_NAME   : true,
+    COLLAPSABLE_DIFFS        : true,
+    SHOW_ALL_HIDE_ALL_BUTTONS: true
   }
 
   var showOutdatedCommentsEl    = document.getElementById('show-outdated-comments')
   var showCurrentDiffFileNameEl = document.getElementById('show-current-diff-file-name')
   var collapsableDiffsEl        = document.getElementById('collapsable-diffs')
+  var showallHideAllButtons     = document.getElementById('showall-hideall-buttons')
 
   var notice = document.getElementById('notice')
 
@@ -18,9 +20,10 @@
 
   document.getElementById('save').addEventListener('click', function save() {
     var configuration = {
-      SHOW_OUTDATED_COMMENTS: showOutdatedCommentsEl.checked,
-      SHOW_CURRENT_FILE_NAME: showCurrentDiffFileNameEl.checked,
-      COLLAPSABLE_DIFFS     : collapsableDiffsEl.checked
+      SHOW_OUTDATED_COMMENTS   : showOutdatedCommentsEl.checked,
+      SHOW_CURRENT_FILE_NAME   : showCurrentDiffFileNameEl.checked,
+      COLLAPSABLE_DIFFS        : collapsableDiffsEl.checked,
+      SHOW_ALL_HIDE_ALL_BUTTONS: showallHideAllButtons.checked
     }
 
     console.log(configuration)
@@ -54,5 +57,6 @@
     showOutdatedCommentsEl.checked    = configuration.SHOW_OUTDATED_COMMENTS
     showCurrentDiffFileNameEl.checked = configuration.SHOW_CURRENT_FILE_NAME
     collapsableDiffsEl.checked        = configuration.COLLAPSABLE_DIFFS
+    showallHideAllButtons.checked     = configuration.SHOW_ALL_HIDE_ALL_BUTTONS
   })
 })()
