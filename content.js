@@ -75,29 +75,33 @@
 
   function showCurrentFileName() {
     var prtoolbar = document.querySelector('.pr-toolbar.js-sticky')
+    if (! prtoolbar) return
 
-    // TODO: Add the first file name at start
-    if (prtoolbar) {
-      var diffbar = prtoolbar.querySelector('.diffbar')
-      var headers = document.getElementsByClassName('file-header')
-      var blobs   = document.getElementsByClassName('blob-wrapper')
+    var diffbar = prtoolbar.querySelector('.diffbar')
+    var headers = document.getElementsByClassName('file-header')
+    var blobs   = document.getElementsByClassName('blob-wrapper')
 
-      var diffbarItem = document.getElementById('__github-suite-current-file')
-      if (! diffbarItem) {
-        diffbarItem = document.createElement('div')
-        diffbarItem.id = '__github-suite-current-file'
-        diffbarItem.className = 'diffbar-item'
-        diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
+    var diffbarItem = document.getElementById('__github-suite-current-file')
+    if (! diffbarItem) {
+      diffbarItem = document.createElement('div')
+      diffbarItem.id = '__github-suite-current-file'
+      diffbarItem.className = 'diffbar-item'
+      diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
+    }
+
+    document.addEventListener('scroll', onScroll, false)
+
+    onScroll()
+
+    function onScroll() {
+      var index = firstIndexInViewport(blobs)
+      var currentHeader = headers[index]
+
+      diffbarItem.style.display = prtoolbar.style.position === 'fixed' ? 'block' : 'none'
+
+      if (currentHeader) {
+        diffbarItem.innerHTML = currentHeader.dataset.path
       }
-
-      document.addEventListener('scroll', function() {
-        var index = firstIndexInViewport(blobs)
-        var currentHeader = headers[index]
-        
-        if (currentHeader) {
-          diffbarItem.innerHTML = currentHeader.dataset.path
-        }
-      }, false)
     }
   }
 
