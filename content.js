@@ -28,13 +28,18 @@
     if (configuration.SHOW_ALL_HIDE_ALL_BUTTONS) {
       showHideAllButtons()
     }
+
+    if (configuration.COLLAPSABLE_COMMITS) {
+      collapseCommits()
+    }
   }
 
   chrome.storage.sync.get({
     SHOW_OUTDATED_COMMENTS   : true,
     SHOW_CURRENT_FILE_NAME   : true,
     COLLAPSABLE_DIFFS        : true,
-    SHOW_ALL_HIDE_ALL_BUTTONS: true
+    SHOW_ALL_HIDE_ALL_BUTTONS: true,
+    COLLAPSABLE_COMMITS      : true
   }, function (items) {
     configuration = items
     main()
@@ -91,7 +96,7 @@
     }
   }
 
-  
+
   function collapsableDiffs() {
     var headers = document.getElementsByClassName('file-header')
 
@@ -137,6 +142,25 @@
     }
   }
 
+  
+  function collapseCommits() {
+    var commitsBucket = document.getElementById('commits_bucket')
+    if(!commitsBucket) return
+
+    var commitGroups = document.getElementsByClassName('commit-group-title')
+
+    for(var i = 0; i < commitGroups.length; i++) {
+      commitGroups[i].addEventListener('click', togglePanel)
+      commitGroups[i].style.cursor = 'pointer'
+    }
+
+    function togglePanel() {
+      var code = nextByClass(this, 'commit-group')
+      if (code) {
+        code.classList.toggle('hidden')
+      }
+    }
+  }
 
   // -----------------------------------------------------------------------------
   // Utils

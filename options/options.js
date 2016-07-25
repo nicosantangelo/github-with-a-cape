@@ -3,13 +3,15 @@
     SHOW_OUTDATED_COMMENTS   : true,
     SHOW_CURRENT_FILE_NAME   : true,
     COLLAPSABLE_DIFFS        : true,
-    SHOW_ALL_HIDE_ALL_BUTTONS: true
+    SHOW_ALL_HIDE_ALL_BUTTONS: true,
+    COLLAPSABLE_COMMITS      : true
   }
 
   var showOutdatedCommentsEl    = document.getElementById('show-outdated-comments')
   var showCurrentDiffFileNameEl = document.getElementById('show-current-diff-file-name')
   var collapsableDiffsEl        = document.getElementById('collapsable-diffs')
   var showallHideAllButtons     = document.getElementById('showall-hideall-buttons')
+  var collapsableCommits        = document.getElementById('collapsable-commits')
 
   var notice = document.getElementById('notice')
 
@@ -23,10 +25,9 @@
       SHOW_OUTDATED_COMMENTS   : showOutdatedCommentsEl.checked,
       SHOW_CURRENT_FILE_NAME   : showCurrentDiffFileNameEl.checked,
       COLLAPSABLE_DIFFS        : collapsableDiffsEl.checked,
-      SHOW_ALL_HIDE_ALL_BUTTONS: showallHideAllButtons.checked
+      SHOW_ALL_HIDE_ALL_BUTTONS: showallHideAllButtons.checked,
+      COLLAPSABLE_COMMITS      : collapsableCommits.checked
     }
-
-    console.log(configuration)
 
     chrome.storage.sync.set(configuration, function() {
       notice.classList.remove('hidden')
@@ -58,5 +59,6 @@
     showCurrentDiffFileNameEl.checked = configuration.SHOW_CURRENT_FILE_NAME
     collapsableDiffsEl.checked        = configuration.COLLAPSABLE_DIFFS
     showallHideAllButtons.checked     = configuration.SHOW_ALL_HIDE_ALL_BUTTONS
+    collapsableCommits.checked        = configuration.COLLAPSABLE_COMMITS
   })
 })()
