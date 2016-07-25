@@ -1,10 +1,14 @@
 {
   "manifest_version": 2,
-  "name": "GitHub suite",
+  "name": "GitHub with a cape",
   "description": "Open-source extension which adds a bunch of useful additions to the GitHub UI",
-  "short_name": "Github suite",
+  "short_name": "Github with a cape",
   "version": "1.0.0",
-  "icons": {},
+  "icons": {
+    "38": "icons/38.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
   "content_scripts": [
     {
       "matches": [

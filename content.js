@@ -72,10 +72,10 @@
     var headers = document.getElementsByClassName('file-header')
     var blobs   = document.getElementsByClassName('blob-wrapper')
 
-    var diffbarItem = document.getElementById('__github-suite-current-file')
+    var diffbarItem = document.getElementById('__github-current-file')
     if (! diffbarItem) {
       diffbarItem = document.createElement('div')
-      diffbarItem.id = '__github-suite-current-file'
+      diffbarItem.id = '__github-current-file'
       diffbarItem.className = 'diffbar-item'
       diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
     }
