@@ -135,8 +135,6 @@
 
   
   function collapseCommits() {
-    if(! document.getElementById('commits_bucket')) return
-
     makeCollapsable({
       trigger: 'commit-group-title',
       toggleableSibling: 'commit-group'
