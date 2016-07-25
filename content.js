@@ -98,19 +98,10 @@
 
 
   function collapsableDiffs() {
-    var headers = document.getElementsByClassName('file-header')
-
-    for(var i = 0; i < headers.length; i++) {
-      headers[i].addEventListener('click', togglePanel)
-      headers[i].style.cursor = 'pointer'
-    }
-
-    function togglePanel() {
-      var code = nextByClass(this, 'blob-wrapper')
-      if (code) {
-        code.classList.toggle('hidden')
-      }
-    }
+    makeCollapsable({
+      trigger: 'file-header',
+      toggleableSibling: 'blob-wrapper'
+    })
   }
 
 
@@ -144,26 +135,32 @@
 
   
   function collapseCommits() {
-    var commitsBucket = document.getElementById('commits_bucket')
-    if(!commitsBucket) return
+    if(! document.getElementById('commits_bucket')) return
 
-    var commitGroups = document.getElementsByClassName('commit-group-title')
+    makeCollapsable({
+      trigger: 'commit-group-title',
+      toggleableSibling: 'commit-group'
+    })
+  }
 
-    for(var i = 0; i < commitGroups.length; i++) {
-      commitGroups[i].addEventListener('click', togglePanel)
-      commitGroups[i].style.cursor = 'pointer'
+  // -----------------------------------------------------------------------------
+  // Utils
+
+  function makeCollapsable(classes) {
+    var triggers = document.getElementsByClassName(classes.trigger)
+
+    for(var i = 0; i < triggers.length; i++) {
+      triggers[i].addEventListener('click', togglePanel)
+      triggers[i].style.cursor = 'pointer'
     }
 
     function togglePanel() {
-      var code = nextByClass(this, 'commit-group')
+      var code = nextByClass(this, classes.toggleableSibling)
       if (code) {
         code.classList.toggle('hidden')
       }
     }
   }
-
-  // -----------------------------------------------------------------------------
-  // Utils
 
   function prevByClass(node, className) {
     return findSibling(node, 'previous', className)
