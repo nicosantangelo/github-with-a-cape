@@ -6,8 +6,12 @@ body {
   background-color: #FFF;
 }
 
-.hidden {
-  display: none;
+a {
+  color: #4078c0;
+  text-decoration: none;
+}
+a:hover, a:active {
+  text-decoration: underline;
 }
 
 header {
@@ -16,8 +20,16 @@ header {
   color: #000;
 }
 
+h1 {
+  font-weight: 400;
+}
+
+.hidden {
+  display: none;
+}
+
 .configuration {
-  width: 500px;
+  width: 410px;
   margin: auto;
   padding: 10px;
 }
