@@ -72,10 +72,10 @@
     var headers = document.getElementsByClassName('file-header')
     var blobs   = document.getElementsByClassName('blob-wrapper')
 
-    var diffbarItem = document.getElementById('__github-current-file')
+    var diffbarItem = document.getElementById('__ghcape-current-file')
     if (! diffbarItem) {
       diffbarItem = document.createElement('div')
-      diffbarItem.id = '__github-current-file'
+      diffbarItem.id = '__ghcape-current-file'
       diffbarItem.className = 'diffbar-item'
       diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
     }
@@ -108,18 +108,18 @@
   function showHideAllButtons() {
     var actions = document.querySelector('.pr-toolbar.js-sticky .float-right')
 
-    if (actions) {
+    if (actions && actions.getElementsByClassName('__ghcape-show-hide-all').length === 0) {
       var headers = Array.prototype.slice.call(document.getElementsByClassName('file-header'))
 
       var showAll = document.createElement('button')
       showAll.innerHTML = 'Show all'
-      showAll.className = 'diffbar-item btn-link muted-link'
+      showAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
       showAll.onclick = function () { changeHadersVisibillity('remove') }
 
       var hideAll = document.createElement('button')
       hideAll.innerHTML = 'Hide all'
-      hideAll.className = 'diffbar-item btn-link muted-link'
-      hideAll.onclick = function () { changeHadersVisibillity('add') } // This will potentially break the filename
+      hideAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
+      hideAll.onclick = function () { changeHadersVisibillity('add') } // This will potentially break the filename on the sticky header
 
       actions.appendChild(showAll)
       actions.appendChild(hideAll)
@@ -152,7 +152,9 @@
       triggers[i].style.cursor = 'pointer'
     }
 
-    function togglePanel() {
+    function togglePanel(event) {
+      if (! event.target.classList.contains(classes.trigger)) return
+
       var code = nextByClass(this, classes.toggleableSibling)
       if (code) {
         code.classList.toggle('hidden')
