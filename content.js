@@ -74,9 +74,7 @@
 
     var diffbarItem = document.getElementById('__ghcape-current-file')
     if (! diffbarItem) {
-      diffbarItem = document.createElement('div')
-      diffbarItem.id = '__ghcape-current-file'
-      diffbarItem.className = 'diffbar-item'
+      diffbarItem = createDiffItem()
       diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
     }
 
@@ -93,6 +91,20 @@
       if (currentHeader) {
         diffbarItem.innerHTML = currentHeader.dataset.path
       }
+    }
+
+    function createDiffItem() {
+      var diffbarItem = document.createElement('div')
+      diffbarItem.id = '__ghcape-current-file'
+      diffbarItem.className = 'diffbar-item'
+
+      diffbarItem.style.width        = "240px"
+      diffbarItem.style.marginRight  = "0"
+      diffbarItem.style.whiteSpace   = "nowrap"
+      diffbarItem.style.textOverflow = "ellipsis"
+      diffbarItem.style.overflow     = "hidden"
+
+      return diffbarItem
     }
   }
 
