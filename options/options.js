@@ -39,10 +39,22 @@
   // -----------------------------------------------------------------------------
   // Start
 
-  chrome.storage.local.get({ justUpdated: false }, function(items) {
-    if (items.justUpdated) {
+  chrome.storage.local.get({ firstInstall: false, justUpdated: 0 }, function(items) {
+    if (items.firstInstall) {
       document.getElementById('first-use-notice').classList.remove('hidden')
-      chrome.storage.local.remove('justUpdated')
+      chrome.storage.local.remove(['firstInstall', 'justUpdated'])
+    }
+
+    if (items.justUpdated > 0) {
+      var newItems = document.getElementsByClassName('new')
+
+      for(var i = 0; i < newItems.length; i++) {
+        newItems[i].classList.remove('hidden')
+      }
+
+      items.justUpdated -= 1
+
+      chrome.storage.local.set({ justUpdated: items.justUpdated })
     }
   })
 
