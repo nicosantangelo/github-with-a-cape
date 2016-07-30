@@ -24,25 +24,27 @@
       Be sure to enable all the options you'd like to use and save the changes.
     </div>
 
-    <div class="option">
-      <input type="checkbox" name="show-outdated-comments" id="show-outdated-comments">
-      Show outdated diff comments by default
-    </div>
-    <div class="option">
-      <input type="checkbox" name="show-current-diff-file-name" id="show-current-diff-file-name">
-      Show the current diff name on the sticky header
-    </div>
-    <div class="option">
-      <input type="checkbox" name="collapsable-diffs" id="collapsable-diffs">
-      Add collapsable diffs
-    </div>
-    <div class="option">
-      <input type="checkbox" name="showall-hideall-buttons" id="showall-hideall-buttons">
-      Show All / Hide All buttons
-    </div>
-    <div class="option">
-      <input type="checkbox" name="collapsable-commits" id="collapsable-commits">
-      Add collapsable commits
+    <div class="options">
+      <div class="option">
+        <input type="checkbox" name="showOutdatedComments" id="showOutdatedComments">
+        Show outdated diff comments by default
+      </div>
+      <div class="option">
+        <input type="checkbox" name="showCurrentDiffFileName" id="showCurrentDiffFileName">
+        Show the current diff name on the sticky header
+      </div>
+      <div class="option">
+        <input type="checkbox" name="collapsableDiffs" id="collapsableDiffs">
+        Add collapsable diffs
+      </div>
+      <div class="option">
+        <input type="checkbox" name="showallHideAllButtons" id="showallHideAllButtons">
+        Show All / Hide All buttons
+      </div>
+      <div class="option">
+        <input type="checkbox" name="collapsableCommits" id="collapsableCommits">
+        Add collapsable commits
+      </div>
     </div>
 
     <br />
@@ -65,6 +67,7 @@
     </div>
   </div>
 
+  <script src="../configuration.js"></script>
   <script src="options.js"></script>
 </body>
 </html>

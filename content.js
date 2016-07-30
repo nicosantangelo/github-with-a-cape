@@ -1,7 +1,9 @@
+/* Globals: configuration */
+
 ;(function () {
   'use strict'
 
-  var configuration = {}
+  var config = {}
 
   var urlObserver = new window.MutationObserver(function(mutations, observer) {
     setTimeout(main)
@@ -13,43 +15,30 @@
   })
 
   function main() {
-    if (configuration.SHOW_OUTDATED_COMMENTS) {
+    if (config.showOutdatedComments) {
       shoutOutdatedDiffs()
     }
 
-    if (configuration.SHOW_CURRENT_FILE_NAME) {
+    if (config.showCurrentDiffFileName) {
       showCurrentFileName()
     }
 
-    if (configuration.COLLAPSABLE_DIFFS) {
+    if (config.collapsableDiffs) {
       collapsableDiffs()
     }
 
-    if (configuration.SHOW_ALL_HIDE_ALL_BUTTONS) {
+    if (config.showallHideAllButtons) {
       showHideAllButtons()
     }
 
-    if (configuration.COLLAPSABLE_COMMITS) {
+    if (config.collapsableCommits) {
       collapseCommits()
     }
   }
 
-  chrome.storage.sync.get({
-    SHOW_OUTDATED_COMMENTS   : true,
-    SHOW_CURRENT_FILE_NAME   : true,
-    COLLAPSABLE_DIFFS        : true,
-    SHOW_ALL_HIDE_ALL_BUTTONS: true,
-    COLLAPSABLE_COMMITS      : true
-  }, function (items) {
-    configuration = items
+  configuration.get(function (items) {
+    config = items
     main()
-  })
-
-  chrome.storage.onChanged.addListener(function(changes, namespace) {
-    // This could be nicer and re-bind all events after each update
-    for(var prop in changes) {
-      configuration[prop] = changes[prop].newValue
-    }
   })
 
   // -----------------------------------------------------------------------------
