@@ -15,24 +15,10 @@
   })
 
   function main() {
-    if (config.showOutdatedComments) {
-      shoutOutdatedDiffs()
-    }
-
-    if (config.showCurrentDiffFileName) {
-      showCurrentFileName()
-    }
-
-    if (config.collapsableDiffs) {
-      collapsableDiffs()
-    }
-
-    if (config.showallHideAllButtons) {
-      showHideAllButtons()
-    }
-
-    if (config.collapsableCommits) {
-      collapseCommits()
+    for(var prop in config) {
+      if (features[prop]) {
+        features[prop]()
+      }
     }
   }
 
@@ -44,102 +30,135 @@
   // -----------------------------------------------------------------------------
   // Features
 
-  function shoutOutdatedDiffs() {
-    var outdatedDiffs = document.getElementsByClassName('outdated-diff-comment-container')
+  var features = {
+    showOutdatedComments: function() {
+      var outdatedDiffs = document.getElementsByClassName('outdated-diff-comment-container')
 
-    for(var i = 0; i < outdatedDiffs.length; i++) {
-      outdatedDiffs[i].classList.add('open')
-    }
-  }
-
-
-  function showCurrentFileName() {
-    var prtoolbar = document.querySelector('.pr-toolbar.js-sticky')
-    if (! prtoolbar) return
-
-    var diffbar = prtoolbar.querySelector('.diffbar')
-    var headers = document.getElementsByClassName('file-header')
-    var blobs   = document.getElementsByClassName('blob-wrapper')
-
-    var diffbarItem = document.getElementById('__ghcape-current-file')
-    if (! diffbarItem) {
-      diffbarItem = createDiffItem()
-      diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
-    }
-
-    document.addEventListener('scroll', onScroll, false)
-
-    onScroll()
-
-    function onScroll() {
-      var index = firstIndexInViewport(blobs)
-      var currentHeader = headers[index]
-
-      diffbarItem.style.display = prtoolbar.style.position === 'fixed' ? 'block' : 'none'
-
-      if (currentHeader) {
-        diffbarItem.innerHTML = currentHeader.dataset.path
+      for(var i = 0; i < outdatedDiffs.length; i++) {
+        outdatedDiffs[i].classList.add('open')
       }
-    }
-
-    function createDiffItem() {
-      var diffbarItem = document.createElement('div')
-      diffbarItem.id = '__ghcape-current-file'
-      diffbarItem.className = 'diffbar-item'
-
-      diffbarItem.style.width        = "240px"
-      diffbarItem.style.marginRight  = "0"
-      diffbarItem.style.whiteSpace   = "nowrap"
-      diffbarItem.style.textOverflow = "ellipsis"
-      diffbarItem.style.overflow     = "hidden"
-
-      return diffbarItem
-    }
-  }
+    },
 
 
-  function collapsableDiffs() {
-    makeCollapsable({
-      trigger: 'file-header',
-      toggleableSibling: 'blob-wrapper'
-    })
-  }
+    showCurrentDiffFileName: function() {
+      var prtoolbar = document.querySelector('.pr-toolbar.js-sticky')
+      if (! prtoolbar) return
+
+      var diffbar = prtoolbar.querySelector('.diffbar')
+      var headers = document.getElementsByClassName('file-header')
+      var blobs   = document.getElementsByClassName('blob-wrapper')
+
+      var diffbarItem = document.getElementById('__ghcape-current-file')
+      if (! diffbarItem) {
+        diffbarItem = createDiffItem()
+        diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
+      }
+
+      document.addEventListener('scroll', onScroll, false)
+
+      onScroll()
+
+      function onScroll() {
+        var index = firstIndexInViewport(blobs)
+        var currentHeader = headers[index]
+
+        diffbarItem.style.display = prtoolbar.style.position === 'fixed' ? 'block' : 'none'
+
+        if (currentHeader) {
+          diffbarItem.innerHTML = currentHeader.dataset.path
+        }
+      }
+
+      function createDiffItem() {
+        var diffbarItem = document.createElement('div')
+        diffbarItem.id = '__ghcape-current-file'
+        diffbarItem.className = 'diffbar-item'
+
+        diffbarItem.style.width        = "240px"
+        diffbarItem.style.marginRight  = "0"
+        diffbarItem.style.whiteSpace   = "nowrap"
+        diffbarItem.style.textOverflow = "ellipsis"
+        diffbarItem.style.overflow     = "hidden"
+
+        return diffbarItem
+      }
+    },
 
 
-  function showHideAllButtons() {
-    var actions = document.querySelector('.pr-toolbar.js-sticky .float-right')
-
-    if (actions && actions.getElementsByClassName('__ghcape-show-hide-all').length === 0) {
-      var headers = Array.prototype.slice.call(document.getElementsByClassName('file-header'))
-
-      var showAll = document.createElement('button')
-      showAll.innerHTML = 'Show all'
-      showAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
-      showAll.onclick = function () { changeHadersVisibillity('remove') }
-
-      var hideAll = document.createElement('button')
-      hideAll.innerHTML = 'Hide all'
-      hideAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
-      hideAll.onclick = function () { changeHadersVisibillity('add') } // This will potentially break the filename on the sticky header
-
-      actions.appendChild(showAll)
-      actions.appendChild(hideAll)
-    }
-
-    function changeHadersVisibillity(method) {
-      headers.forEach(function (header) {
-        var code = nextByClass(header, 'blob-wrapper')
-        if (code) code.classList[method]('hidden')
+    collapsableDiffs: function() {
+      makeCollapsable({
+        trigger: 'file-header',
+        toggleableSibling: 'blob-wrapper'
       })
-    }
-  }
+    },
+
+
+    showHideAllButtons: function() {
+      var actions = document.querySelector('.pr-toolbar.js-sticky .float-right')
+
+      if (actions && actions.getElementsByClassName('__ghcape-show-hide-all').length === 0) {
+        var headers = Array.prototype.slice.call(document.getElementsByClassName('file-header'))
+
+        var showAll = document.createElement('button')
+        showAll.innerHTML = 'Show all'
+        showAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
+        showAll.onclick = function () { changeHadersVisibillity('remove') }
+
+        var hideAll = document.createElement('button')
+        hideAll.innerHTML = 'Hide all'
+        hideAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
+        hideAll.onclick = function () { changeHadersVisibillity('add') } // This will potentially break the filename on the sticky header
+
+        actions.appendChild(showAll)
+        actions.appendChild(hideAll)
+      }
+
+      function changeHadersVisibillity(method) {
+        headers.forEach(function (header) {
+          var code = nextByClass(header, 'blob-wrapper')
+          if (code) code.classList[method]('hidden')
+        })
+      }
+    },
 
   
-  function collapseCommits() {
-    makeCollapsable({
-      trigger: 'commit-group-title',
-      toggleableSibling: 'commit-group'
-    })
+    collapsableCommits: function() {
+      makeCollapsable({
+        trigger: 'commit-group-title',
+        toggleableSibling: 'commit-group'
+      })
+    },
+
+
+    toggleContributions: function() {
+      var actionClasses = [
+        { trigger: '.text-diff-added',   code: 'blob-code-addition' },
+        { trigger: '.text-diff-deleted', code: 'blob-code-deletion' }
+      ]
+
+      actionClasses.forEach(function(classes) {
+        var tooltipText = { 'Hide': 'Show', 'Show': 'Hide' }
+        var trigger = document.querySelector('.diffbar-item.diffstat > ' + classes.trigger)
+
+        trigger.style.cursor = 'pointer'
+        trigger.classList.add('tooltipped', 'tooltipped-s')
+        trigger.setAttribute('aria-label', 'Hide')
+
+        trigger.addEventListener('click', function() {
+          var code = document.getElementsByClassName('blob-code ' + classes.code)
+          var newTooltipText = tooltipText[trigger.getAttribute('aria-label')]
+          trigger.setAttribute('aria-label', 'Loading')
+
+          setTimeout(function () {
+            for(var i = 0; i < code.length; i++) {
+                code[i].parentNode.classList.toggle('hidden')
+            }
+            trigger.setAttribute('aria-label', newTooltipText)
+          })
+        }, true)
+      })
+    }
+
   }
 
   // -----------------------------------------------------------------------------

@@ -3,8 +3,9 @@
     showOutdatedComments   : true,
     showCurrentDiffFileName: true,
     collapsableDiffs       : true,
-    showallHideAllButtons  : true,
-    collapsableCommits     : true
+    showHideAllButtons     : true,
+    collapsableCommits     : true,
+    toggleContributions    : true
   }
 
   var configuration = {
