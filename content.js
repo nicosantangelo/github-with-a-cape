@@ -27,6 +27,71 @@
     main()
   })
 
+  var get = function (url, callback) {
+    var xmlhttp = new XMLHttpRequest()
+
+    xmlhttp.onreadystatechange = function(result) {
+      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+        callback(xmlhttp.responseText)
+      }
+    }
+
+    xmlhttp.open('GET', url, true)
+    xmlhttp.send()
+  }
+
+  get(chrome.extension.getURL('modal.html'), function(modalHTML) {
+    get('https://api.github.com/notifications?access_token=XXX', function(notificationsResponse) {
+      var indicator = document.querySelector("#user-links .notification-indicator")
+      indicator.classList.remove('tooltipped-s')
+      indicator.classList.add('tooltipped-w')
+
+      var div = document.createElement('div')
+      div.innerHTML = modalHTML
+      document.body.appendChild(div)
+
+      var modal = document.getElementById('__ghcape-modal')
+      modal.style.left = (indicator.offsetLeft + indicator.offsetWidth - 300) + "px"
+
+      var notifications = JSON.parse(notificationsResponse)
+      var notificationsList = ''
+
+      if (notifications.length > 0) {
+        let icons = {
+          pull   : modal.querySelector('.octicon-git-pull-request'),
+          issues : modal.querySelector('.octicon-issue-opened'),
+          commits: modal.querySelector('.octicon-git-commit')
+        }
+
+        notificationsList = notifications.map(function(notification) {
+          let subject = notification.subject
+          let repo    = notification.repository
+          let resourceId = subject.url.split('/').slice(-1)
+
+          let type = { Issue: 'issues', PullRequest: 'pull', Commit: 'commits' }[subject.type]
+
+          let url = repo.html_url + '/' + type + '/' + resourceId
+
+          let link = '<a href="' + url + '">' + icons[type].outerHTML + notification.subject.title + '</a>'
+
+          return '<li>' + link + '</li>'
+        }).join('\n')
+      } else {
+        notificationsList = '<li style="text-align:center;">No new notifications</li>'
+      }
+
+      document.getElementById('__ghcape-notifications-list').innerHTML = notificationsList
+
+      indicator.addEventListener('click', function(event) {
+        indicator.blur()
+        modal.classList.toggle('hidden')
+        event.preventDefault()
+      }, true)
+    })
+  })
+
+
+
   // -----------------------------------------------------------------------------
   // Features
 
@@ -137,8 +202,10 @@
       ]
 
       actionClasses.forEach(function(classes) {
-        var tooltipText = { 'Hide': 'Show', 'Show': 'Hide' }
         var trigger = document.querySelector('.diffbar-item.diffstat > ' + classes.trigger)
+        if (! trigger) return
+
+        var tooltipText = { 'Hide': 'Show', 'Show': 'Hide' }
 
         trigger.style.cursor = 'pointer'
         trigger.classList.add('tooltipped', 'tooltipped-s')
@@ -151,7 +218,7 @@
 
           setTimeout(function () {
             for(var i = 0; i < code.length; i++) {
-                code[i].parentNode.classList.toggle('hidden')
+              code[i].parentNode.classList.toggle('hidden')
             }
             trigger.setAttribute('aria-label', newTooltipText)
           })

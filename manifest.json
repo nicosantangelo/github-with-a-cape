@@ -32,5 +32,5 @@
   },
   "options_page": "options/options.html",
   "permissions": ["storage"],
-  "web_accessible_resources": []
+  "web_accessible_resources": ["modal.html"]
 }
