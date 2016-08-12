@@ -1,11 +1,12 @@
 ;(function () {
   var DEFAULT_CONFIGURATION = {
-    showOutdatedComments   : true,
+    showOutdatedComments   : false,
     showCurrentDiffFileName: true,
     collapsableDiffs       : true,
     showHideAllButtons     : true,
     collapsableCommits     : true,
-    toggleContributions    : true
+    toggleContributions    : true,
+    notifications          : false
   }
 
   var configuration = {
@@ -17,8 +18,15 @@
       }
     },
 
-    get: function(callback) {
-      chrome.storage.sync.get(DEFAULT_CONFIGURATION, callback)
+    get: function(key, callback) {
+      if (typeof key === 'function') {
+        callback = key
+        chrome.storage.sync.get(DEFAULT_CONFIGURATION, callback)
+      } else {
+        chrome.storage.sync.get(key, function(result) {
+          callback(result[key])
+        })
+      }
     },
 
     set: function(values, callback) {

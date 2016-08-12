@@ -3,10 +3,15 @@
 ;(function() {
   var saveTimeout
   var notice = document.getElementById('notice')
+  var notificationsAccessToken = document.getElementById('notifications-access-token')
   var elements = {}
 
   configuration.forEachDefault(function (key, value) {
     elements[key] = document.getElementById(key)
+  })
+
+  configuration.get('notificationAccessToken', function(token) {
+    notificationsAccessToken.value = token
   })
   
 
@@ -19,6 +24,8 @@
     configuration.forEachDefault(function (key, value) {
       newValues[key] = elements[key].checked
     })
+
+    newValues['notificationAccessToken'] = notificationsAccessToken.value
 
     configuration.set(newValues, function () {
       notice.classList.remove('hidden')
