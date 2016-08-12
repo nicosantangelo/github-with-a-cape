@@ -11,7 +11,7 @@
   })
 
   configuration.get('notificationAccessToken', function(token) {
-    notificationsAccessToken.value = token
+    notificationsAccessToken.value = token || ''
   })
   
 
