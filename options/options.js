@@ -29,6 +29,7 @@
 
     configuration.set(newValues, function () {
       notice.classList.remove('hidden')
+      window.scrollTo(0, document.body.scrollHeight)
       clearTimeout(saveTimeout)
       saveTimeout = setTimeout(function () { notice.classList.add('hidden') }, 4000)
     })
