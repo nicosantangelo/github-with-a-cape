@@ -63,7 +63,7 @@ _To_
 
 ### Show outdated diff comments by default
 
-Tired of having to click on __ each time you enter a PR? Well not anymore!
+Tired of having to click on _Show x comments_ each time you readt the PR comments? Well not anymore!
 This option shows the diff by default
 
 _These will be visible by default_
