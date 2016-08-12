@@ -21,7 +21,6 @@
   .__ghcape-menu div:focus { outline: 0; }
   .__ghcape-menu-header {
     padding: 8px 10px;
-    line-height: 16px;
     background: #F5F5F5;
     border-bottom: 1px solid rgba(200,200,200,0.4);
   }
@@ -30,8 +29,21 @@
     font-weight: bold;
     color: #333;
   }
-  .__ghcape-menu-header .__ghcape-link {
+  .__ghcape-menu-header .__ghcape-actions {
     float: right;
+    display: inline-block;
+  }
+  .__ghcape-menu-header .__ghcape-mark-as-read {
+    padding: 2px 6px 5px 10px;
+    margin-top: 0;
+    margin-right: 0;
+    line-height: 11px;
+    color: #767676;
+    background-color: transparent;
+    border: 0;
+  }
+  .__ghcape-menu-header .__ghcape-mark-as-read:focus {
+    box-shadow: none;
   }
 
   .__ghcape-menu-item {
@@ -58,13 +70,23 @@
     margin-right: 6px;
   }
 
+  #__ghcape-notifications-list li.__ghcape-empty {
+    text-align: center;
+    padding: 10px;
+  }
+
 
 </style>
 <div id="__ghcape-modal" class="__ghcape-modal hidden">
   <div class="__ghcape-menu" aria-hidden="false">
     <div class="__ghcape-menu-header" tabindex="-1">
       <span class="__ghcape-title">Unread notifications</span>
-      <a href="/notifications" class="__ghcape-link">See all</a>
+      <div class="__ghcape-actions">
+        <button id="__ghcape-mark-as-read" class="__ghcape-mark-as-read css-truncate tooltipped tooltipped-w" aria-label="Mark all notifications as read">
+          <svg aria-hidden="true" class="octicon octicon-check" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
+        </button>
+        <a href="/notifications">See all</a>
+      </div>
     </div>
 
     <div class="__ghcape-menu-list" role="menu">

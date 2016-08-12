@@ -10,12 +10,12 @@
   }
 
   function renderNotifications(url) {
-    httpGet(NOTIFICATIONS_HTML, function(modalHTML) {
+    http({ method: 'GET', url: NOTIFICATIONS_HTML }, function(modalHTML) {
       var div = document.createElement('div')
       div.innerHTML = modalHTML
       document.body.appendChild(div)
 
-      httpGet(url, appendNotifications)
+      http({ method: 'GET', url: url }, appendNotifications)
     })
   }
 
@@ -44,11 +44,14 @@
       if (linkheader) {
         notificationsList.push('<li style="text-align:center;"><a href="/notifications">See all</a></li>')
       }
+
+      document.getElementById('__ghcape-notifications-list').innerHTML = notificationsList.join('\n')
     } else {
-      notificationsList = ['<li style="text-align:center;">No new notifications</li>']
+      setEmptyNotificationsNotice()
     }
 
-    document.getElementById('__ghcape-notifications-list').innerHTML = notificationsList.join('\n')
+
+    document.getElementById('__ghcape-mark-as-read').addEventListener('click', readNotifications, true)
 
     indicator.addEventListener('click', function(event) {
       indicator.blur()
@@ -57,7 +60,7 @@
     }, true)
   }
 
-  function buildNotificationsListHTML(notifications, iconsHTMl) {
+  function buildNotificationsListHTML(notifications, iconsHTML) {
     return notifications.map(function(notification) {
       let subject = notification.subject
 
@@ -66,26 +69,41 @@
 
       let url = notification.repository.html_url + '/' + type + '/' + resourceId
 
-      let link = '<a href="' + url + '">' + iconsHTML[type] + subject.title + '</a>'
+      let link = '<a href="' + url + '" data-id="' + notification.id + '">' + iconsHTML[type] + subject.title + '</a>'
 
       return '<li>' + link + '</li>'
+    })
+  }
+
+  function readNotifications(event) {
+    getApiURL(function(url) {
+      http({
+        method: 'PUT',
+        url: url,
+        data: { read: true }
+      }, setEmptyNotificationsNotice)
     })
   }
 
   // -----------------------------------------------------------------------------
   // Utils
 
-  function httpGet(url, callback, headers) {
+  function http(options, success, error) {
     var xmlhttp = new XMLHttpRequest()
 
     xmlhttp.onreadystatechange = function(result) {
-      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-        callback(xmlhttp.responseText, xmlhttp)
+      if (xmlhttp.readyState === 4) {
+        if(xmlhttp.status >= 300) {
+          error && error(xmlhttp.responseText, xmlhttp)
+        } else {
+          success(xmlhttp.responseText, xmlhttp)
+        }
       }
+
     }
 
-    xmlhttp.open('GET', url, true)
-    xmlhttp.send()
+    xmlhttp.open(options.method, options.url, true)
+    xmlhttp.send(JSON.stringify(options.data))
   }
 
   function getApiURL(callback) {
@@ -95,4 +113,9 @@
       }
     })
   }
+
+  function setEmptyNotificationsNotice() {
+    document.getElementById('__ghcape-notifications-list').innerHTML = '<li class="__ghcape-empty">No new notifications</li>'
+  }
+
 })()
