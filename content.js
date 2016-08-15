@@ -33,7 +33,6 @@
 
   var features = {
     showOutdatedComments: function() {
-      console.log('showOutdatedComments')
       var outdatedDiffs = document.getElementsByClassName('outdated-diff-comment-container')
 
       for(var i = 0; i < outdatedDiffs.length; i++) {
@@ -68,6 +67,7 @@
 
         if (currentHeader) {
           diffbarItem.innerHTML = currentHeader.dataset.path
+          diffbarItem.title = currentHeader.dataset.path
         }
       }
 
