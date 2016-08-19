@@ -54,10 +54,13 @@
     document.getElementById('__ghcape-mark-as-read').addEventListener('click', readNotifications, true)
 
     indicator.addEventListener('click', function(event) {
+      // 'Middle' mouse click
+      if (event.which === 2) return
+
       event.preventDefault()
       
       indicator.blur()
-      
+
       if (modal.classList.contains('hidden')) {
         modal.classList.remove('hidden')
         document.body.addEventListener('click', hideNotificationsModalOnOutsideClick)
