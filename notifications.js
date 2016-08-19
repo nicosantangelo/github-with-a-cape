@@ -1,8 +1,10 @@
 /* Globals: configuration */
 
 (function() {
+  var LOADED = false
   var NOTIFICATIONS_HTML = chrome.extension.getURL('notifications.html')
   var API_URL = null
+  
   var lastRequest = {
     lastModified: '',
     text: ''
@@ -11,7 +13,15 @@
   getApiURL(function(url) { API_URL = url })
 
   window.notifications = {
+    load: function() {
+      if (! LOADED) {
+        LOADED = true
+        notifications.start()
+      }
+    },
+
     start: function() {
+      console.log('start')
       http({ method: 'GET', url: NOTIFICATIONS_HTML }, function(modalHTML) {
         appendModal(modalHTML)
 

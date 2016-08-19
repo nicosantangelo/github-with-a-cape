@@ -164,7 +164,7 @@
     },
 
     notifications: function() {
-      notifications.start()
+      notifications.load()
     }
   }
 
