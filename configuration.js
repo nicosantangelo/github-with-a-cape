@@ -1,12 +1,13 @@
 ;(function () {
   var DEFAULT_CONFIGURATION = {
-    showOutdatedComments   : false,
-    showCurrentDiffFileName: true,
-    collapsableDiffs       : true,
-    showHideAllButtons     : true,
-    collapsableCommits     : true,
-    toggleContributions    : true,
-    notifications          : false
+    showOutdatedComments      : false,
+    highlightOutdatedDiffIcons: false,
+    showCurrentDiffFileName   : true,
+    collapsableDiffs          : true,
+    showHideAllButtons        : true,
+    collapsableCommits        : true,
+    toggleContributions       : true,
+    notifications             : false
   }
 
   var configuration = {

@@ -41,6 +41,17 @@
     },
 
 
+    highlightOutdatedDiffIcons: function() {
+      var octicons = document.querySelectorAll('.discussion-timeline .discussion-item-icon .octicon-x')
+
+      for(var i = 0; i < octicons.length; i++) {
+        var discussionItemIcon = octicons[i].parentElement
+        discussionItemIcon.style.backgroundColor = '#ffefc6'
+        discussionItemIcon.style.color = '#4c4a42'
+      }
+    },
+
+
     showCurrentDiffFileName: function() {
       var prtoolbar = document.querySelector('.pr-toolbar.js-sticky')
       if (! prtoolbar) return
