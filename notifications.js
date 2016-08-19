@@ -24,7 +24,7 @@
       http({ method: 'GET', url: NOTIFICATIONS_HTML }, function(modalHTML) {
         appendModal(modalHTML)
 
-        var indicator = document.querySelector("#user-links .notification-indicator")
+        var indicator = document.querySelector('#user-links .notification-indicator')
         indicator.classList.remove('tooltipped-s')
         indicator.classList.add('tooltipped-w')
 
@@ -67,10 +67,12 @@
       headers: { 'If-Modified-Since': lastRequest.lastModified }
     }, function(responseText, fullResponse) {
       lastRequest.lastModified = fullResponse.getResponseHeader('Last-Modified') || lastRequest.lastModified
-      
-      var text = responseText === ''
-        ? lastRequest.text
-        : responseText
+
+      var text = '[]'
+
+      if (newNotificationsBadgeVisible()) {
+        text = responseText === '' ? lastRequest.text : responseText
+      }
 
       renderNotifications(text, fullResponse)
       lastRequest.text = text
@@ -135,7 +137,7 @@
     var target = event.target
     var parent = target.parentElement
     var selector = target.classList + " " + parent.classList + " " + parent.parentElement.id
-    
+
     var notificationClasses = /notification-indicator|octicon-bell|__ghcape-notifications-list/
 
     var clickedOnNotifications = selector.search(notificationClasses) !== -1
@@ -144,6 +146,10 @@
       var modal = document.getElementById('__ghcape-modal')
       modal.classList.add('hidden')
     }
+  }
+
+  function newNotificationsBadgeVisible() {
+    return !! document.querySelector('.notification-indicator .mail-status.unread')
   }
 
   // -----------------------------------------------------------------------------
