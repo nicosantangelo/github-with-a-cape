@@ -54,9 +54,17 @@
     document.getElementById('__ghcape-mark-as-read').addEventListener('click', readNotifications, true)
 
     indicator.addEventListener('click', function(event) {
-      indicator.blur()
-      modal.classList.toggle('hidden')
       event.preventDefault()
+      
+      indicator.blur()
+      
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden')
+        document.body.addEventListener('click', hideNotificationsModalOnOutsideClick)
+      } else {
+        modal.classList.add('hidden')
+        document.body.removeEventListener('click', hideNotificationsModalOnOutsideClick)
+      }
     }, true)
   }
 
@@ -83,6 +91,19 @@
         data: { read: true }
       }, setEmptyNotificationsNotice)
     })
+  }
+
+  function hideNotificationsModalOnOutsideClick(event) {
+    // Take the less reliable but more efficient route
+    var targetClassList = event.target.classList
+    var parentClassList = event.target.parentElement.classList
+    var clickedOnNotifications = targetClassList.contains('notification-indicator') || parentClassList.contains('octicon-bell')
+
+    var modal = document.getElementById('__ghcape-modal')
+
+    if (! clickedOnNotifications) {
+      modal.classList.add('hidden')
+    }
   }
 
   // -----------------------------------------------------------------------------
