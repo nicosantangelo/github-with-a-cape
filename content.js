@@ -206,7 +206,7 @@
   }
 
   function firstIndexInViewport(els) {
-    for(let i = 0; i < els.length; i++) {
+    for(var i = 0; i < els.length; i++) {
       if (inViewport(els[i])) {
         return i
       }
@@ -214,8 +214,8 @@
   }
 
   function inViewport(el) {
-    let rect = el.getBoundingClientRect()
-    let windowHeight = window.innerHeight || document.documentElement.clientHeight
+    var rect = el.getBoundingClientRect()
+    var windowHeight = window.innerHeight || document.documentElement.clientHeight
     return rect.height && rect.top <= windowHeight && (rect.top + rect.height) >= 0
   }
 })()
