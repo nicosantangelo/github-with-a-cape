@@ -99,7 +99,7 @@
 
       document.getElementById('__ghcape-notifications-list').innerHTML = notificationsList.join('\n')
     } else {
-      setEmptyNotificationsNotice()
+      setEmptyNotificationsNotice('No new notifications')
     }
   }
 
@@ -120,20 +120,25 @@
   }
 
   function readNotifications(event) {
-    getApiURL(function(url) {
-      http({
-        method: 'PUT',
-        url: url,
-        data: { read: true }
-      }, setEmptyNotificationsNotice.bind('No new notifications'))
-    })
+    http({
+      method: 'PUT',
+      url: API_URL,
+      data: { read: true }
+    }, setEmptyNotificationsNotice.bind(null, 'No new notifications'))
+
+    event.target.parentElement.parentElement.blur() // wat
+    event.stopPropagation()
   }
 
   function hideNotificationsModalOnOutsideClick(event) {
-    // Take the less reliable but more efficient route
-    var classes = event.target.classList + " " + event.target.parentElement.classList
-    var notificationClasses = /notification-indicator|octicon-bell/
-    var clickedOnNotifications = classes.search(notificationClasses) !== -1
+    // Take the less reliable but more efficient route just to avoid traversing the DOM tree
+    var target = event.target
+    var parent = target.parentElement
+    var selector = target.classList + " " + parent.classList + " " + parent.parentElement.id
+    
+    var notificationClasses = /notification-indicator|octicon-bell|__ghcape-notifications-list/
+
+    var clickedOnNotifications = selector.search(notificationClasses) !== -1
 
     if (! clickedOnNotifications) {
       var modal = document.getElementById('__ghcape-modal')
