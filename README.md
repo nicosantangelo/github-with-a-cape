@@ -15,6 +15,7 @@ The extension is "unopinionated" meaning is up to you to choose which features t
 5. [Add collapsable commits](#add-collapsable-commits)
 6. [Toggle contributions by clicking the added/deleted stats](#toggle-contributions-by-clicking-the-addeddeleted-stats)
 7. [Show outdated diff comments by default](#show-outdated-diff-comments-by-default)
+8. [Highlights the outdated diff icon (the X) on PRs](#highlight-outdated-diff-icon)
 
 ### Notifications modal
 
@@ -70,6 +71,12 @@ _These will be visible by default_
 
 ![Toggle contributions to](http://i.imgur.com/tAvtY5k.png)
 
+
+### Highlight outdated diff icon
+
+![Highlight outdated diff icon](http://i.imgur.com/tiu8IEy.png)
+
+Specially useful when [show outdated diff comments by default](#show-outdated-diff-comments-by-default) is enabled
 
 -------
 
