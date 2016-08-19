@@ -55,6 +55,11 @@
     list-style: none;
   }
 
+  #__ghcape-notifications-list li.__ghcape-empty {
+    text-align: center;
+    padding: 10px;
+  }
+
   #__ghcape-notifications-list li a {
     padding: 10px;
     text-decoration: none;
@@ -68,11 +73,6 @@
   }
   #__ghcape-notifications-list li a svg {
     margin-right: 6px;
-  }
-
-  #__ghcape-notifications-list li.__ghcape-empty {
-    text-align: center;
-    padding: 10px;
   }
 
 
@@ -91,7 +91,9 @@
 
     <div class="__ghcape-menu-list" role="menu">
       <div class="__ghcape-menu-item" role="menuitem" tabindex="0">
-        <ul id="__ghcape-notifications-list"></ul>
+        <ul id="__ghcape-notifications-list">
+          <li class="__ghcape-empty">Loading...</li>
+        </ul>
       </div>
     </div>
   </div>
