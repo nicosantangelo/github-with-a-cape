@@ -110,7 +110,7 @@
       var subject = notification.subject
 
       var resourceId = subject.url.split('/').slice(-1)
-      var type = { Issue: 'issues', PullRequest: 'pull', Commit: 'commits' }[subject.type]
+      var type = { Issue: 'issues', PullRequest: 'pull', Commit: 'commit' }[subject.type]
 
       var url = notification.repository.html_url + '/' + type + '/' + resourceId
       var title = escapeHTML(subject.title)
