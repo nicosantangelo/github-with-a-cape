@@ -88,9 +88,9 @@
       var modal = document.getElementById('__ghcape-modal')
 
       var iconsHTML = {
-        pull   : modal.querySelector('.octicon-git-pull-request').outerHTML,
-        issues : modal.querySelector('.octicon-issue-opened').outerHTML,
-        commits: modal.querySelector('.octicon-git-commit').outerHTML
+        pull  : modal.querySelector('.octicon-git-pull-request').outerHTML,
+        issues: modal.querySelector('.octicon-issue-opened').outerHTML,
+        commit: modal.querySelector('.octicon-git-commit').outerHTML
       }
 
       notificationsList = buildNotificationsListHTML(notifications, iconsHTML)
