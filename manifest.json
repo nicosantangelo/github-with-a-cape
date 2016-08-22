@@ -3,7 +3,7 @@
   "name": "GitHub with a cape",
   "description": "Open source extension which adds a bunch of useful additions to the GitHub UI",
   "short_name": "Github with a cape",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "icons": {
     "18": "icons/18.png",
     "19": "icons/19.png",
