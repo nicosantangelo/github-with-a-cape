@@ -22,14 +22,13 @@
 
     start: function() {
       http({ method: 'GET', url: NOTIFICATIONS_HTML }, function(modalHTML) {
-        appendModal(modalHTML)
-
         var indicator = document.querySelector('#user-links .notification-indicator')
         indicator.classList.remove('tooltipped-s')
         indicator.classList.add('tooltipped-w')
 
+        appendModal(indicator.parentElement, modalHTML)
+
         var modal = document.getElementById('__ghcape-modal')
-        modal.style.left = (indicator.offsetLeft + indicator.offsetWidth - 300) + "px"
 
         indicator.addEventListener('click', function(event) {
           if (event.which === 2) return // 'Middle' mouse click
@@ -52,10 +51,13 @@
     }
   }
 
-  function appendModal(modalHTML) {
-    var modalContainer = document.createElement('div')
-    modalContainer.innerHTML = modalHTML
-    document.body.appendChild(modalContainer)
+
+  function appendModal(container, modalHTML) {
+    var modal = document.createElement('div')
+    modal.innerHTML = modalHTML
+
+    container.style.position = 'relative'
+    container.appendChild(modal)
   }
 
   function requestNotifications() {
