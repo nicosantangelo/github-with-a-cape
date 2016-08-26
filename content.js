@@ -63,7 +63,7 @@
       var diffbarItem = document.getElementById('__ghcape-current-file')
       if (! diffbarItem) {
         diffbarItem = createDiffItem()
-        diffbar.insertBefore(diffbarItem, diffbar.querySelector('.float-right'))
+        diffbar.insertBefore(diffbarItem, diffbar.querySelector('.diffbar-item.toc-select').nextElementSibling)
       }
 
       document.addEventListener('scroll', onScroll, false)
