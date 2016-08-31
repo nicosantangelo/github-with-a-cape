@@ -27,6 +27,7 @@
     main()
   })
 
+  insertStyles()
 
   // -----------------------------------------------------------------------------
   // Features
@@ -129,7 +130,7 @@
       function changeHadersVisibillity(method) {
         headers.forEach(function(header) {
           var code = nextByClass(header, 'blob-wrapper')
-          if (code) code.classList[method]('hidden')
+          if (code) code.classList[method]('__ghcape-hidden')
         })
       }
     },
@@ -145,8 +146,8 @@
 
     toggleContributions: function() {
       var actionClasses = [
-        { trigger: '.text-diff-added',   code: 'blob-code-addition' },
-        { trigger: '.text-diff-deleted', code: 'blob-code-deletion' }
+        { trigger: '.text-green', code: 'blob-code-addition' },
+        { trigger: '.text-red', code: 'blob-code-deletion' }
       ]
 
       actionClasses.forEach(function(classes) {
@@ -166,7 +167,7 @@
 
           setTimeout(function () {
             for(var i = 0; i < code.length; i++) {
-              code[i].parentNode.classList.toggle('hidden')
+              code[i].parentNode.classList.toggle('__ghcape-hidden')
             }
             trigger.setAttribute('aria-label', newTooltipText)
           })
@@ -195,7 +196,7 @@
 
       var code = nextByClass(this, classes.toggleableSibling)
       if (code) {
-        code.classList.toggle('hidden')
+        code.classList.toggle('__ghcape-hidden')
       }
     }
   }
@@ -228,5 +229,11 @@
     var rect = el.getBoundingClientRect()
     var windowHeight = window.innerHeight || document.documentElement.clientHeight
     return rect.height && rect.top <= windowHeight && (rect.top + rect.height) >= 0
+  }
+
+  function insertStyles() {
+    var style = document.createElement('style')
+    style.innerHTML = '.__ghcape-hidden { display: none !important; }'
+    document.body.appendChild(style)
   }
 })()

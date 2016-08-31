@@ -36,12 +36,12 @@
           event.preventDefault()
           indicator.blur()
 
-          if (modal.classList.contains('hidden')) {
-            modal.classList.remove('hidden')
+          if (modal.classList.contains('__ghcape-hidden')) {
+            modal.classList.remove('__ghcape-hidden')
             document.body.addEventListener('click', hideNotificationsModalOnOutsideClick)
             requestNotifications()
           } else {
-            modal.classList.add('hidden')
+            modal.classList.add('__ghcape-hidden')
             document.body.removeEventListener('click', hideNotificationsModalOnOutsideClick)
           }
         }, true)
@@ -146,7 +146,7 @@
 
     if (! clickedOnNotifications) {
       var modal = document.getElementById('__ghcape-modal')
-      modal.classList.add('hidden')
+      modal.classList.add('__ghcape-hidden')
     }
   }
 
