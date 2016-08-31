@@ -107,7 +107,7 @@
 
 
     showHideAllButtons: function() {
-      var actions = document.querySelector('.pr-toolbar.js-sticky .float-right')
+      var actions = document.querySelector('.pr-toolbar.js-sticky .toc-select ~ .float-right') // Ugh
 
       if (actions && actions.getElementsByClassName('__ghcape-show-hide-all').length === 0) {
         var headers = Array.prototype.slice.call(document.getElementsByClassName('file-header'))
@@ -115,19 +115,19 @@
         var showAll = document.createElement('button')
         showAll.innerHTML = 'Show all'
         showAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
-        showAll.onclick = function () { changeHadersVisibillity('remove') }
+        showAll.onclick = function() { changeHadersVisibillity('remove') }
 
         var hideAll = document.createElement('button')
         hideAll.innerHTML = 'Hide all'
         hideAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
-        hideAll.onclick = function () { changeHadersVisibillity('add') } // This will potentially break the filename on the sticky header
+        hideAll.onclick = function() { changeHadersVisibillity('add') } // This will potentially break the filename on the sticky header
 
         actions.appendChild(showAll)
         actions.appendChild(hideAll)
       }
 
       function changeHadersVisibillity(method) {
-        headers.forEach(function (header) {
+        headers.forEach(function(header) {
           var code = nextByClass(header, 'blob-wrapper')
           if (code) code.classList[method]('hidden')
         })
