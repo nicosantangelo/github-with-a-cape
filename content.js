@@ -102,6 +102,7 @@
     collapsableDiffs: function() {
       makeCollapsable({
         trigger: 'file-header',
+        targets: ['file-header', 'file-info'],
         toggleableSibling: 'blob-wrapper'
       })
     },
@@ -185,6 +186,7 @@
 
   function makeCollapsable(classes) {
     var triggers = document.getElementsByClassName(classes.trigger)
+    var targets  = classes.targets || [ classes.trigger ]
 
     for(var i = 0; i < triggers.length; i++) {
       triggers[i].addEventListener('click', togglePanel)
@@ -192,7 +194,7 @@
     }
 
     function togglePanel(event) {
-      if (! event.target.classList.contains(classes.trigger)) return
+      if (! containsAnyClass(event.target, targets)) return
 
       var code = nextByClass(this, classes.toggleableSibling)
       if (code) {
@@ -215,6 +217,15 @@
         return node
       }
     }
+  }
+
+  function containsAnyClass(el, classes) {
+    for(var i = 0; i < classes.length; i++) {
+      if (el.classList.contains(classes[i])) {
+        return true
+      }
+    }
+    return false
   }
 
   function firstIndexInViewport(els) {
