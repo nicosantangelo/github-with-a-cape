@@ -64,7 +64,7 @@
       var diffbarItem = document.getElementById('__ghcape-current-file')
       if (! diffbarItem) {
         diffbarItem = createDiffItem()
-        diffbar.insertBefore(diffbarItem, diffbar.querySelector('.diffbar-item.toc-select').nextElementSibling)
+        diffbar.insertBefore(diffbarItem, diffbar.querySelector('.diffbar-item.diffstat').nextElementSibling)
       }
 
       document.addEventListener('scroll', onScroll, false)
@@ -78,21 +78,26 @@
         diffbarItem.style.display = prtoolbar.style.position === 'fixed' ? 'block' : 'none'
 
         if (currentHeader) {
-          diffbarItem.innerHTML = currentHeader.dataset.path
-          diffbarItem.title = currentHeader.dataset.path
+          diffbarItem.setAttribute('aria-label', currentHeader.dataset.path)
+          diffbarItem.firstChild.innerHTML = currentHeader.dataset.path.split('/').slice(-1)
         }
       }
 
       function createDiffItem() {
         var diffbarItem = document.createElement('div')
+        var path = document.createElement('div')
+
         diffbarItem.id = '__ghcape-current-file'
         diffbarItem.className = 'diffbar-item'
+        diffbarItem.classList.add('tooltipped', 'tooltipped-s')
 
-        diffbarItem.style.width        = "240px"
-        diffbarItem.style.marginRight  = "0"
-        diffbarItem.style.whiteSpace   = "nowrap"
-        diffbarItem.style.textOverflow = "ellipsis"
-        diffbarItem.style.overflow     = "hidden"
+        path.style.maxWidth        = config.showHideAllButtons ? "170px" : "290px"
+        path.style.marginRight  = "0"
+        path.style.whiteSpace   = "nowrap"
+        path.style.textOverflow = "ellipsis"
+        path.style.overflow     = "hidden"
+
+        diffbarItem.appendChild(path)
 
         return diffbarItem
       }
@@ -244,7 +249,7 @@
 
   function insertStyles() {
     var style = document.createElement('style')
-    style.innerHTML = '.__ghcape-hidden { display: none !important; }'
+    style.innerHTML = '.__ghcape-hidden { display: none !important; } .__ghcape-show-hide-all { line-height: 28px; }'
     document.body.appendChild(style)
   }
 })()
