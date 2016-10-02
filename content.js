@@ -182,7 +182,7 @@
     },
 
 
-    draggableSplitDiffs: function() {
+    resizeableSplittedDiffs: function() {
       var splitButton = document.querySelector('.BtnGroup [aria-label="Viewing diff in split mode"]')
 
       if(! splitButton) return

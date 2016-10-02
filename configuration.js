@@ -7,6 +7,7 @@
     showHideAllButtons        : true,
     collapsableCommits        : true,
     toggleContributions       : true,
+    resizeableSplittedDiffs   : true,
     notifications             : false
   }
 
