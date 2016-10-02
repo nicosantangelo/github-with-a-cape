@@ -187,12 +187,13 @@
 
       if(! splitButton) return
 
-      var tables = Array.prototype.slice.call(document.getElementsByClassName('diff-table'))
+      var datas = Array.prototype.slice.call(document.querySelectorAll('.data:not(.__ghcape-draggable)'))
       var codeWidth = null
       var draggableBarWidth = null
 
-      tables.forEach(function(table) {
-        var data = table.parentElement
+      datas.forEach(function(data) {
+        var table = data.firstElementChild
+
         var code = findFirstTd(table)
 
         if(! draggableBarWidth) {
