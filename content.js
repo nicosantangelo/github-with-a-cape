@@ -29,6 +29,81 @@
 
   insertStyles()
 
+
+function draggableDiffs() {
+  var splitButton = document.querySelector('.BtnGroup [aria-label="Viewing diff in split mode"]')
+
+  if(! splitButton) return
+
+  var tables = Array.prototype.slice.call(document.getElementsByClassName('diff-table'))
+  var codeWidth = null
+  var draggableBarWidth = null
+
+  tables.forEach(function(table) {
+    var data = table.parentElement
+    var code = findFirstTd(table)
+
+    if(! draggableBarWidth) {
+      var tr = table.querySelector('tr:not(.js-expandable-line)')
+      draggableBarWidth = (tr.clientWidth / 2) + 'px'
+    }
+
+    if(! codeWidth) {
+      codeWidth = getComputedStyle(code, null).getPropertyValue('width')
+      codeWidth = parseInt(codeWidth, 10) + 'px'
+    }
+
+    var draggableBar = document.createElement('div')
+    draggableBar.className = '__ghcape-draggable-bar'
+    draggableBar.style.top = 0
+    draggableBar.style.left = draggableBarWidth
+
+    code.style.width = codeWidth
+
+    data.classList.add('__ghcape-draggable')
+    data.appendChild(draggableBar)
+
+    setTimeout(function() { attachEvents(draggableBar) }, 0)
+  })
+
+  function attachEvents(draggableBar) {
+    var table  = draggableBar.previousElementSibling
+    var offset = 0
+    var mouseX = 0
+    var td     = null
+
+    var move = function(event) {
+      td = td || findFirstTd(table)
+
+      var direction = mouseX === 0 ? 1 : (event.pageX - mouseX)
+
+      td.style.width = (parseInt(td.style.width, 10) + direction) + 'px'
+      draggableBar.style.left = (event.clientX - offset) + 'px'
+
+      mouseX = event.pageX
+    }
+
+    draggableBar.addEventListener('mousedown', function(e) {
+      offset = e.clientX - parseInt(draggableBar.style.left, 10)
+      table.parentElement.style.userSelect = 'none'
+      document.addEventListener('mousemove', move, false)
+    }, false)
+
+    document.addEventListener('mouseup', function() {
+      table.parentElement.style.userSelect = 'inherit'
+      document.removeEventListener('mousemove', move, false)
+    }, false)
+  }
+
+  function findFirstTd(table) {
+    return table.querySelector('.blob-num:not(.blob-num-expandable):not(.blob-num-hunk) ~ td')
+  }
+}
+
+console.time('draggableDiffs')
+draggableDiffs()
+console.timeEnd('draggableDiffs')
+
   // -----------------------------------------------------------------------------
   // Features
 
@@ -141,7 +216,7 @@
       }
     },
 
-  
+
     collapsableCommits: function() {
       makeCollapsable({
         trigger: 'commit-group-title',
@@ -249,7 +324,28 @@
 
   function insertStyles() {
     var style = document.createElement('style')
-    style.innerHTML = '.__ghcape-hidden { display: none !important; } .__ghcape-show-hide-all { line-height: 28px; }'
+    var styles = [
+      '.__ghcape-hidden { display: none !important; }',
+
+      '.__ghcape-show-hide-all { line-height: 28px; }',
+
+      '.__ghcape-draggable { position: relative; }',
+      '.__ghcape-draggable .diff-table.file-diff-split { table-layout: auto; }',
+      '.__ghcape-draggable td.blob-num { width: inherit; min-width: inherit; }',
+
+      `.__ghcape-draggable-bar {
+        height: 100%;
+        width: 8px;
+        top: 0;
+        position: absolute;
+        border-left: 2px solid #d8d8d8;
+        border-right: 2px solid #d8d8d8;
+        background: #F7F7F7;
+        cursor: col-resize;
+      }`
+    ]
+    style.innerHTML = styles.join(' ')
+
     document.body.appendChild(style)
   }
 })()
