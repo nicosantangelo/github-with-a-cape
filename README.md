@@ -9,13 +9,14 @@ Open source extension which adds a bunch of useful additions to the GitHub UI to
 The extension is "unopinionated" meaning is up to you to choose which features to enable.
 
 1. [Notifications modal](#notifications-modal)
-2. [Add collapsable diffs](#add-collapsable-diffs)
-3. [Show All / Hide All buttons](#show-all-hide-all-buttons)
-4. [Show the current diff name on the sticky header](#show-the-current-diff-name-on-the-sticky-header)
-5. [Add collapsable commits](#add-collapsable-commits)
-6. [Toggle contributions by clicking the added/deleted stats](#toggle-contributions-by-clicking-the-addeddeleted-stats)
-7. [Show outdated diff comments by default](#show-outdated-diff-comments-by-default)
-8. [Highlights the outdated diff icon (the X) on PRs](#highlight-outdated-diff-icon)
+2. [Resizeable splitted diffs](#resizeable-splitted-diffs)
+3. [Add collapsable diffs](#add-collapsable-diffs)
+4. [Show All / Hide All buttons](#show-all-hide-all-buttons)
+5. [Show the current diff name on the sticky header](#show-the-current-diff-name-on-the-sticky-header)
+6. [Add collapsable commits](#add-collapsable-commits)
+7. [Toggle contributions by clicking the added/deleted stats](#toggle-contributions-by-clicking-the-addeddeleted-stats)
+8. [Show outdated diff comments by default](#show-outdated-diff-comments-by-default)
+9. [Highlights the outdated diff icon (the X) on PRs](#highlight-outdated-diff-icon)
 
 ### Notifications modal
 
@@ -24,6 +25,13 @@ When clicking the notifications bell, instead of accessing the notifications pag
 Sadly the GitHub API does not allow reading specific notifications (at least to my knoledge) so accessing one thru the modal will keep it unread
 
 ![Notifications modal](http://i.imgur.com/WaSMtig.png)
+
+### Resizeable splitted diffs
+
+A gray vertical bar is added to each split diff allowing you to drag horizontally each code piece.
+
+![Resizing diff](http://i.imgur.com/0AtSmjK.png)
+
 
 ### Add collapsable diffs
 
