@@ -194,6 +194,8 @@
       datas.forEach(function(data) {
         var table = data.firstElementChild
 
+        if (! table) return
+
         var code = findFirstTd(table)
 
         if(! draggableBarWidth) {
