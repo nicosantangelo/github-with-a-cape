@@ -91,11 +91,16 @@
         diffbarItem.className = 'diffbar-item'
         diffbarItem.classList.add('tooltipped', 'tooltipped-s')
 
-        path.style.maxWidth        = config.showHideAllButtons ? "170px" : "290px"
-        path.style.marginRight  = "0"
-        path.style.whiteSpace   = "nowrap"
-        path.style.textOverflow = "ellipsis"
-        path.style.overflow     = "hidden"
+        path.style.marginRight  = '0'
+        path.style.whiteSpace   = 'nowrap'
+        path.style.textOverflow = 'ellipsis'
+        path.style.overflow     = 'hidden'
+
+        if (! inSplitView() && viewingSubsetChanges()) {
+          path.style.maxWidth = '65px'
+        } else {
+          path.style.maxWidth = config.showHideAllButtons ? '160px' : '290px'
+        }
 
         diffbarItem.appendChild(path)
 
@@ -118,15 +123,20 @@
 
       if (actions && actions.getElementsByClassName('__ghcape-show-hide-all').length === 0) {
         var headers = Array.prototype.slice.call(document.getElementsByClassName('file-header'))
+        var className = 'btn-link muted-link __ghcape-show-hide-all'
+
+        if(! inSplitView() && viewingSubsetChanges()){
+          className += ' __ghcape-hidden'
+        }
 
         var showAll = document.createElement('button')
         showAll.innerHTML = 'Show all'
-        showAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
+        showAll.className = className
         showAll.onclick = function() { changeHadersVisibillity('remove') }
 
         var hideAll = document.createElement('button')
         hideAll.innerHTML = 'Hide all'
-        hideAll.className = 'diffbar-item btn-link muted-link __ghcape-show-hide-all'
+        hideAll.className = className
         hideAll.onclick = function() { changeHadersVisibillity('add') } // This will potentially break the filename on the sticky header
 
         actions.appendChild(showAll)
@@ -183,9 +193,7 @@
 
 
     resizeableSplittedDiffs: function() {
-      var splitButton = document.querySelector('.BtnGroup [aria-label="Viewing diff in split mode"]')
-
-      if(! splitButton) return
+      if(! inSplitView()) return
 
       var datas = Array.prototype.slice.call(document.querySelectorAll('.data:not(.__ghcape-draggable)'))
       var codeWidth = null
@@ -326,12 +334,20 @@
     return rect.height && rect.top <= windowHeight && (rect.top + rect.height) >= 0
   }
 
+  function inSplitView() {
+    return !! document.querySelector('.BtnGroup [aria-label="Viewing diff in split mode"]')
+  }
+
+  function viewingSubsetChanges() {
+    return document.getElementsByClassName('subset-files-tab').length
+  }
+
   function insertStyles() {
     var style = document.createElement('style')
     var styles = [
       '.__ghcape-hidden { display: none !important; }',
 
-      '.__ghcape-show-hide-all { line-height: 28px; }',
+      '.__ghcape-show-hide-all { margin-left: 8px; line-height: 28px; }',
 
       '.__ghcape-draggable { position: relative; }',
       '.__ghcape-draggable .diff-table.file-diff-split { table-layout: auto; }',
