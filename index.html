@@ -148,32 +148,14 @@
       <span class="by">by <a href="https://nicosantangelo.com" target="_blank">NicoSantangelo</a></span>
     </footer>
 
-    <!-- Chrome webstore -->
-    <script>
-      (function() {
-        var buttons = document.getElementsByClassName('get-it')
-
-        if (chrome.app.isInstalled) {
-          buttons[0].style.visibility = 'hidden'
-          buttons[1].innerHTML = 'Webstore'
-        } else {
-          var inlineInstall = function(event) {
-            chrome.webstore.install('https://chrome.google.com/webstore/detail/ohkgmmldhbadfleajjafdeahmakbbcpi')
-            event.preventDefault()
-          }
-
-          for (var i = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener('click', inlineInstall, true)
-          }
-        }
-      })()
-    </script>
-
     <!-- Tweet Button -->
     <script>;(function(a,c,e){var d=a.getElementsByTagName(c)[0],b={};a=a.createElement(c);a.id=e;a.src="https://platform.twitter.com/widgets.js";d.parentNode.insertBefore(a,d);b._e=[];b.ready=function(a){b._e.push(a)};return b})(document,"script","twitter-wjs");</script>
 
     <!-- GitHub stars button -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Main -->
+    <script src="main.js"></script>
 
     <!-- Google Analytics -->
     <script>
