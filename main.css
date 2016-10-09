@@ -6,6 +6,7 @@ body {
   background-color: #FFF;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   box-sizing: border-box;
+  margin: 0;
 }
 
 .text-center {
@@ -15,17 +16,12 @@ body {
 .main {
   margin: 0 auto;
   max-width: 100em;
-  padding: 1.5em 6em 3em;
-}
-
-@media screen and (max-width: 567px) {
-  .main {
-    padding: 2rem 1rem;
-  }
+  padding-top: 1.5em;
+  padding-bottom: 2.2em;
 }
 
 header {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 header h1 {
@@ -33,14 +29,26 @@ header h1 {
   font-size: 1.4em;
 }
 
+.padded {
+  padding-left: 6em;
+  padding-right: 6em;
+}
+
 /*
   DETAILS
 */
 
 
+.features-list {
+  padding: 0 20px;
+  background-color: #424242;
+  color: #FFF;
+}
+
 .features {
-  margin: 40px auto 20px;
-  max-width: 640px;
+  margin: 0 auto;
+  padding: 65px 0 45px;
+  max-width: 840px;
   width: 100%;
 }
 
@@ -50,13 +58,23 @@ header h1 {
   overflow: hidden;
 }
 
+.features .feature:first-child {
+  margin-top: 0;
+}
+
+.features .feature:last-child {
+  margin-bottom: 0;
+}
+
 .features .feature .feature-img {
   width: 100%;
   float: left;
+  text-align: center;
 }
 
 .features .feature .feature-img img {
-  width: 100%;
+  width: 85%;
+  margin-bottom: 20px;
 }
 
 .features .feature .feature-description {
@@ -69,6 +87,11 @@ header h1 {
     width: 50%;
   }
 
+  .features .feature .feature-img img {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
   .features .feature .feature-description {
     width: 45%;
     padding-left: 25px;
@@ -77,15 +100,14 @@ header h1 {
 
 
 .features .feature .feature-title {
-  margin: 0.5rem 0 1rem;
-  font-size: 1.2rem;
+  margin: 0 0 1rem;
+  font-size: 1.3rem;
   font-family: Montserrat,Open Sans,Lucida Grande,sans-serif;
-  color: #222;
 }
 
 .features .feature .feature-text {
   font-size: 0.9rem;
-  line-height: 1.2rem;
+  line-height: 1.4rem;
 }
 
 /*
@@ -95,10 +117,14 @@ header h1 {
 .actions {
 }
 
-.actions .horizontal-line {
-  border-bottom: 1px solid #666;
+.actions.top-actions {
   position: relative;
   top: 20px;
+}
+
+.actions.bottom-actions {
+  position: relative;
+  bottom: 20px;
 }
 
 .actions > a {
@@ -116,8 +142,7 @@ header h1 {
   font-weight: 500;
 
   color: #FFF;
-  background-color: #cc1b00;
-  border: 1px solid #FFF;
+  background-color: #CC1B00;
 
   text-decoration: none;
 
@@ -145,7 +170,7 @@ header h1 {
 
 footer {
   width: 310px;
-  padding-bottom: 10px;
+  padding-bottom: 25px;
   margin: auto;
   text-align: right;
 }
