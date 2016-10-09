@@ -22,7 +22,7 @@ The extension is "unopinionated" meaning is up to you to choose which features t
 
 When clicking the notifications bell, instead of accessing the notifications page, it displays a modal with each notification and adds a shortcut to read all of them.
 
-Sadly the GitHub API does not allow reading specific notifications (at least to my knoledge) so accessing one thru the modal will keep it unread
+Sadly the GitHub API does not allow reading specific notifications (at least to my knoledge) so accessing one thru the modal will keep it unread.
 
 ![Notifications modal](http://i.imgur.com/WaSMtig.png)
 
@@ -35,13 +35,13 @@ A gray vertical bar is added to each split diff allowing you to drag horizontall
 
 ### Add collapsable diffs
 
-Be able to collapse diffs clicking on the header
+Be able to collapse diffs clicking on the header.
 
 ![Collapsable diffs](http://i.imgur.com/2GRlUM0.png)
 
 ### Show All / Hide All buttons
 
-Adds two buttons to collapse or uncollapse all files
+Adds two buttons to collapse or uncollapse all files.
 
 ![Show and hide buttons](http://i.imgur.com/1K3crFX.png)
 
@@ -49,17 +49,17 @@ Adds two buttons to collapse or uncollapse all files
 
 `↑`
 
-![Current diff name](http://i.imgur.com/EVFc2rMl.png)
+![Current diff name](http://i.imgur.com/jtftIwB.png)
 
 ### Add collapsable commits
 
-I don't know if I'm the only one who finds this useful
+I don't know if I'm the only one who finds this useful.
 
 ![Collapsable commits](http://i.imgur.com/WgOT0zb.png)
 
 ### Toggle contributions by clicking the added/deleted stats
 
-If you click the added or deleted colored text, it will toggle that contribution type in the diff
+If you click the added or deleted colored text, it will toggle that contribution type in the diff.
 
 _From_
 
@@ -72,8 +72,8 @@ _To_
 
 ### Show outdated diff comments by default
 
-Tired of having to click on _Show x comments_ each time you readt the PR comments? Well not anymore!
-This option shows the diff by default
+Tired of having to click on _Show x comments_ each time you read the PR comments? Well not anymore!
+This option shows the diff by default.
 
 _These will be visible by default_
 
@@ -84,7 +84,7 @@ _These will be visible by default_
 
 ![Highlight outdated diff icon](http://i.imgur.com/tiu8IEy.png)
 
-Specially useful when [show outdated diff comments by default](#show-outdated-diff-comments-by-default) is enabled
+Specially useful when [show outdated diff comments by default](#show-outdated-diff-comments-by-default) is enabled.
 
 -------
 
