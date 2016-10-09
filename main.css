@@ -31,22 +31,51 @@ header h1 {
   font-size: 1.4em;
 }
 
+@media screen and (min-width: 390px) {
+  header {
+    max-width: 370px
+  }
+}
 
+.description {
+  width: 550px;
+  line-height: 1.4em;
+  font-size: 1.1em;
+  margin: 0 auto 40px;
+  color: #9B9B9B;
+  text-align: center;
+}
+
+/*
+  QUOTE ANIMATION
+*/
 
 @keyframes quotes {
-  100% { opacity: 1; }
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes quotes-title {
+  100%  { opacity: 1; }
 }
 
 .quote {
   opacity: 0;
-  animation: quotes .5s forwards;
+}
+
+h1.quote {
+  animation: 'quotes-title' 1s forwards;
 }
 span.quote {
+  font-size: 98%;
   position: absolute;
-  font-size: 90%;
+  animation: 'quotes' 1s forwards;
 }
 
 .quote:nth-child(1) {
+  font-size: 72%;
+
   top: 0;
   left: 0;
 
@@ -59,6 +88,8 @@ span.quote {
 .quote:nth-child(2) {
   top: 0;
   right: 0;
+
+  font-size: 95%;
 
   -ms-transform: rotate(16deg);
   -webkit-transform: rotate(16deg);
@@ -78,21 +109,10 @@ span.quote {
   animation-delay: 4s;
 }
 
-
 @media screen and (min-width: 390px) {
-  header {
-    max-width: 370px
-  }
-
   .quote:nth-child(3) {
     left: 122px;
   }
-}
-
-
-.padded {
-  padding-left: 6em;
-  padding-right: 6em;
 }
 
 /*
@@ -179,23 +199,18 @@ span.quote {
 .actions {
 }
 
-.actions.bottom-actions {
-  position: relative;
-  bottom: 20px;
-}
-
 .actions > a {
-  width: 90px;
+  width: 250px;
   position: relative;
 }
 
 .btn {
-  height: 28px;
+  height: 35px;
   padding: 5px;
-  line-height: 28px;
+  line-height: 2em;
   border-radius: 5px;
 
-  font-size: 13px;
+  font-size: 1em;
   font-weight: 500;
 
   color: #FFF;
@@ -226,7 +241,7 @@ span.quote {
 */
 
 footer {
-  width: 310px;
+  width: 350px;
   padding-bottom: 25px;
   margin: auto;
   text-align: right;
@@ -234,6 +249,7 @@ footer {
 
 footer iframe {
   vertical-align: middle;
+  min-width: 80px;
 }
 
 .twitter-share-button {
