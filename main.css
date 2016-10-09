@@ -21,7 +21,7 @@ body {
 }
 
 header {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 header h1 {
@@ -41,6 +41,7 @@ header h1 {
 
 .features-list {
   padding: 0 20px;
+  margin-top: -20px;
   background-color: #424242;
   color: #FFF;
 }
@@ -115,11 +116,6 @@ header h1 {
 */
 
 .actions {
-}
-
-.actions.top-actions {
-  position: relative;
-  top: 20px;
 }
 
 .actions.bottom-actions {
