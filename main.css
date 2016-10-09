@@ -21,13 +21,62 @@ body {
 }
 
 header {
-  margin-bottom: 30px;
+  position: relative;
+  margin: 0 auto 30px;
+  max-width: 370px
 }
 
 header h1 {
   font-weight: 400;
   font-size: 1.4em;
 }
+
+
+
+@keyframes quotes {
+  100% { opacity: 1; }
+}
+
+.quote {
+  opacity: 0;
+  animation: quotes .5s forwards;
+}
+span.quote {
+  position: absolute;
+}
+
+.quote:nth-child(1) {
+  top: 0;
+  left: 0;
+
+  -ms-transform: rotate(-16deg);
+  -webkit-transform: rotate(-16deg);
+  transform: rotate(-16deg);
+
+  animation-delay: 0.5s;
+}
+.quote:nth-child(2) {
+  top: 0;
+  right: 0;
+
+  -ms-transform: rotate(16deg);
+  -webkit-transform: rotate(16deg);
+  transform: rotate(16deg);
+
+  animation-delay: 1.5s;
+}
+.quote:nth-child(3) {
+  top: 3px;
+  left: 120px;
+  animation-delay: 3s;
+}
+.quote:nth-child(4) {
+  animation-delay: 3s;
+}
+.quote.last-quote {
+  animation-delay: 4s;
+}
+
 
 .padded {
   padding-left: 6em;
