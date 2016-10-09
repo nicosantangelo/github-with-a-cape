@@ -23,7 +23,7 @@ body {
 header {
   position: relative;
   margin: 0 auto 30px;
-  max-width: 370px
+  max-width: 300px
 }
 
 header h1 {
@@ -43,6 +43,7 @@ header h1 {
 }
 span.quote {
   position: absolute;
+  font-size: 90%;
 }
 
 .quote:nth-child(1) {
@@ -66,8 +67,8 @@ span.quote {
   animation-delay: 1.5s;
 }
 .quote:nth-child(3) {
-  top: 3px;
-  left: 120px;
+  top: 4px;
+  left: 90px;
   animation-delay: 3s;
 }
 .quote:nth-child(4) {
@@ -75,6 +76,17 @@ span.quote {
 }
 .quote.last-quote {
   animation-delay: 4s;
+}
+
+
+@media screen and (min-width: 390px) {
+  header {
+    max-width: 370px
+  }
+
+  .quote:nth-child(3) {
+    left: 122px;
+  }
 }
 
 
