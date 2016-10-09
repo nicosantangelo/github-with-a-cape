@@ -1,0 +1,176 @@
+/*
+  MAIN
+*/
+
+body {
+  background-color: #FFF;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.main {
+  margin: 0 auto;
+  max-width: 100em;
+  padding: 3em 6em;
+}
+
+@media screen and (max-width: 567px) {
+  .main {
+    padding: 2rem 1rem;
+  }
+}
+
+header {
+  padding-right: 20px;
+}
+
+
+/*
+  DETAILS
+*/
+
+
+.features {
+  margin: 40px auto 20px;
+  max-width: 640px;
+  width: 100%;
+}
+
+.features .feature {
+  margin: 20px 0 40px;
+  overflow: hidden;
+}
+
+.features .feature .feature-img {
+  width: 100%;
+  float: left;
+}
+
+.features .feature .feature-img img {
+  width: 100%;
+}
+
+.features .feature .feature-description {
+  width: 100%;
+  float: left;
+}
+
+@media screen and (min-width: 762px) {
+  .features .feature .feature-img {
+    width: 50%;
+  }
+
+  .features .feature .feature-description {
+    width: 45%;
+    padding-left: 25px;
+  }
+}
+
+
+.features .feature .feature-title {
+  margin: 0.5rem 0 1rem;
+  font-size: 1.2rem;
+  font-family: Montserrat,Open Sans,Lucida Grande,sans-serif;
+  color: #222;
+}
+
+.features .feature .feature-text {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+}
+
+/*
+  ACTIONS
+*/
+
+.actions {
+}
+
+.actions .horizontal-line {
+  border-bottom: 1px solid #666;
+  position: relative;
+  top: 20px;
+}
+
+.actions > a {
+  margin: 0 8px;
+  width: 90px;
+  position: relative;
+}
+
+.btn {
+  height: 28px;
+  padding: 5px;
+  line-height: 28px;
+  border-radius: 5px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  color: #FFF;
+  background-color: #cc1b00;
+  border: 1px solid #FFF;
+
+  text-decoration: none;
+
+  display: inline-block;
+}
+
+.get-it {
+  background-color: #EA2001;
+}
+.get-it:hover {
+  background-color: #CC1B00;
+}
+
+.github {
+  color: #444;
+  text-decoration: none;
+}
+.github:hover {
+  color: #000;
+}
+
+/*
+  FOOTER
+*/
+
+footer {
+  width: 310px;
+  padding-bottom: 10px;
+  margin: auto;
+  text-align: right;
+}
+
+footer iframe {
+  vertical-align: middle;
+}
+
+.twitter-share-button {
+  min-width: 62px
+ }
+
+.github-button {
+  min-width: 80px;
+  visibility: hidden;
+  display: inline-block;
+}
+
+.bullet {
+  margin: 0 5px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.by {
+  font-size: 14px;
+}
+
+.by a {
+  text-decoration: none;
+  color: #EA2001;
+}
