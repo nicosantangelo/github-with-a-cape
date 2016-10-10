@@ -1,22 +1,29 @@
 (function() {
-  var buttons = document.getElementsByClassName('get-it')
+  var forEachButton = function(fn) {
+    var buttons = document.getElementsByClassName('get-it')
+    for (var i = 0; i < buttons.length; i++) {
+      fn(buttons[i])
+    }
+  }
 
   if (chrome.app.isInstalled) {
-    buttons[0].style.visibility = 'hidden'
-    buttons[1].innerHTML = 'Webstore'
+    forEachButton(function(button) {
+      button.innerHTML = 'VIEW IN WEBSTORE'
+    })
   } else {
     var inlineInstall = function(event) {
       var url = event.target.href
 
-      chrome.webstore.install(url, function success() {
-      }, function error() {
+      chrome.webstore.install(url, function success() {}, function error() {
         window.location = url
       })
+
+      ga('send', 'event', 'Button', 'click', 'Install')
       event.preventDefault()
     }
 
-    for (var i = 0; i < buttons.length; i++) {
-      buttons[i].addEventListener('click', inlineInstall, true)
-    }
+    forEachButton(function(button) {
+      button.addEventListener('click', inlineInstall, true)
+    })
   }
 })()
