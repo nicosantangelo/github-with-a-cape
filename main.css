@@ -23,7 +23,8 @@ body {
 header {
   position: relative;
   margin: 0 auto 30px;
-  max-width: 300px
+  max-width: 300px;
+  min-height: 215px;
 }
 
 header h1 {
