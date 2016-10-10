@@ -65,12 +65,12 @@ header h1 {
 }
 
 h1.quote {
-  animation: 'quotes-title' 1s forwards;
+  animation: quotes-title 1s forwards;
 }
 span.quote {
   font-size: 98%;
   position: absolute;
-  animation: 'quotes' 1s forwards;
+  animation: quotes 1s forwards;
 }
 
 .quote:nth-child(1) {
@@ -83,7 +83,7 @@ span.quote {
   -webkit-transform: rotate(-16deg);
   transform: rotate(-16deg);
 
-  animation-delay: 0.5s;
+  animation-delay: 0.6s;
 }
 .quote:nth-child(2) {
   top: 0;
@@ -95,7 +95,7 @@ span.quote {
   -webkit-transform: rotate(16deg);
   transform: rotate(16deg);
 
-  animation-delay: 1.5s;
+  animation-delay: 1.6s;
 }
 .quote:nth-child(3) {
   top: 4px;
