@@ -250,10 +250,10 @@ span.quote {
 */
 
 footer {
-  width: 350px;
+  width: 340px;
   padding-bottom: 25px;
   margin: auto;
-  text-align: right;
+  text-align: center;
 }
 
 footer iframe {
