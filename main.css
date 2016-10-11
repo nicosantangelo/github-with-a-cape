@@ -49,7 +49,7 @@ header h1 {
 
 @media screen and (min-width: 762px) {
   .description {
-    width: 530px;
+    width: 480px;
     font-size: 1.1em;
     padding: 0;
   }
