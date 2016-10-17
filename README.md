@@ -2,7 +2,7 @@
 
 [Webstore](https://chrome.google.com/webstore/detail/github-with-a-cape/ohkgmmldhbadfleajjafdeahmakbbcpi)
 
-Open source extension which adds a bunch of useful additions to the GitHub UI to make your experience _super_ fun (god that was lame).
+Open source Chrome Extension which adds a bunch of new features to GitHub. Customize by picking the ones you like!
 
 ## Features
 

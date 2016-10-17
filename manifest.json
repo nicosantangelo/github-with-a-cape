@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "GitHub with a cape",
-  "description": "Open source extension which adds a bunch of useful additions to the GitHub UI",
+  "description": "Open source Chrome Extension which adds a bunch of new features to GitHub. Customize by picking the ones you like!",
   "short_name": "Github with a cape",
   "version": "1.4.0",
   "icons": {
