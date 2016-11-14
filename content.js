@@ -113,7 +113,7 @@
       makeCollapsable({
         trigger: 'file-header',
         targets: ['file-header', 'file-info'],
-        toggleableSibling: 'blob-wrapper'
+        toggleableSibling: 'js-file-content'
       })
     },
 
