@@ -15,9 +15,13 @@
   })
 
   function main() {
-    for(var prop in config) {
-      if (config[prop] && features[prop]) {
-        features[prop]()
+    if (document.querySelector('.diff-progressive-loader')) {
+      setTimeout(main, 100)
+    } else {
+      for(var prop in config) {
+        if (config[prop] && features[prop]) {
+          features[prop]()
+        }
       }
     }
   }
@@ -145,7 +149,7 @@
 
       function changeHadersVisibillity(method) {
         headers.forEach(function(header) {
-          var code = nextByClass(header, 'blob-wrapper')
+          var code = nextByClass(header, 'js-file-content')
           if (code) code.classList[method]('__ghcape-hidden')
         })
       }
@@ -155,6 +159,7 @@
     collapsableCommits: function() {
       makeCollapsable({
         trigger: 'commit-group-title',
+        targets: ['commit-group-title', 'octicon-git-commit'],
         toggleableSibling: 'commit-group'
       })
     },
