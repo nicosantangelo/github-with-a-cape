@@ -31,7 +31,12 @@
     "scripts": ["background.js"],
     "persistent": false
   },
+
   "options_page": "options/options.html",
+  "options_ui": {
+      "page": "options/options.html"
+  },
+
   "permissions": ["storage"],
   "web_accessible_resources": ["notifications.html"]
 }

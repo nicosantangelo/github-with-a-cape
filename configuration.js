@@ -10,6 +10,7 @@
     resizeableSplittedDiffs   : true,
     notifications             : false
   }
+  var storage = chrome.storage
 
   var configuration = {
     DEFAULT: DEFAULT_CONFIGURATION,
@@ -23,20 +24,20 @@
     get: function(key, callback) {
       if (typeof key === 'function') {
         callback = key
-        chrome.storage.sync.get(DEFAULT_CONFIGURATION, callback)
+        storage._sync.get(DEFAULT_CONFIGURATION, callback)
       } else {
-        chrome.storage.sync.get(key, function(result) {
+        storage._sync.get(key, function(result) {
           callback(result[key])
         })
       }
     },
 
     set: function(values, callback) {
-      chrome.storage.sync.set(values, callback)
+      storage._sync.set(values, callback)
     },
 
     onChanged: function(callback) {
-      chrome.storage.onChanged.addListener(function(changes, namespace) {
+      storage.onChanged.addListener(function(changes, namespace) {
         callback(changes)
       })
     },
@@ -49,6 +50,9 @@
       })
     }
   }
+
+  // Patch chrome.storage to use local if sync it's not supported (Firefox)
+  storage._sync = storage.sync ? storage.sync : storage.local
 
   window.configuration = configuration
 })()

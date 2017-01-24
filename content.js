@@ -78,8 +78,9 @@
       function onScroll() {
         var index = firstIndexInViewport(blobs)
         var currentHeader = headers[index]
+        var toolbarPosition = prtoolbar.style.position
 
-        diffbarItem.style.display = prtoolbar.style.position === 'fixed' ? 'block' : 'none'
+        diffbarItem.style.display = toolbarPosition === 'fixed' || toolbarPosition === 'sticky' ? 'block' : 'none'
 
         if (currentHeader) {
           diffbarItem.setAttribute('aria-label', currentHeader.dataset.path)
