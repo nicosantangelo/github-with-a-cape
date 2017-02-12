@@ -92,7 +92,8 @@
       var iconsHTML = {
         pull  : modal.querySelector('.octicon-git-pull-request').outerHTML,
         issues: modal.querySelector('.octicon-issue-opened').outerHTML,
-        commit: modal.querySelector('.octicon-git-commit').outerHTML
+        commit: modal.querySelector('.octicon-git-commit').outerHTML,
+        invite: modal.querySelector('.octicon-mail').outerHTML
       }
 
       notificationsList = buildNotificationsListHTML(notifications, iconsHTML)
@@ -111,15 +112,24 @@
     return notifications.map(function(notification) {
       var subject = notification.subject
 
-      var resourceId = subject.url.split('/').slice(-1)
-      var type = { Issue: 'issues', PullRequest: 'pull', Commit: 'commit' }[subject.type]
+      var type = {
+        Issue: 'issues',
+        PullRequest: 'pull',
+        Commit: 'commit',
+        RepositoryInvitation: 'invite'
+      }[subject.type]
 
-      var url = notification.repository.html_url + '/' + type + '/' + resourceId
+      var url = notification.repository.html_url
       var title = escapeHTML(subject.title)
 
-      var link = '<a href="' + url + '" data-id="' + notification.id + '">' + iconsHTML[type] + title + '</a>'
+      if (subject.url) {
+        var resourceId = subject.url.split('/').slice(-1)
+        url += '/' + type + '/' + resourceId
+      }
 
-      return '<li>' + link + '</li>'
+      var icon = iconsHTML[type] || ''
+
+      return '<li><a href="' + url + '" data-id="' + notification.id + '">' + icon + title + '</a></li>'
     })
   }
 
