@@ -13,13 +13,10 @@
   } else {
     var inlineInstall = function(event) {
       var url = event.target.href
-
-      chrome.webstore.install(url, function success() {}, function error() {
-        window.location = url
-      })
+      event.preventDefault()
 
       ga('send', 'event', 'Button', 'click', 'Install')
-      event.preventDefault()
+      window.location = url
     }
 
     forEachButton(function(button) {
