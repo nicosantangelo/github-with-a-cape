@@ -3,8 +3,8 @@
 */
 
 body {
-  background-color: #FFF;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fff;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
 }
@@ -33,7 +33,7 @@ header h1 {
 
 @media screen and (min-width: 390px) {
   header {
-    max-width: 370px
+    max-width: 370px;
   }
 }
 
@@ -42,7 +42,7 @@ header h1 {
   line-height: 1.4em;
   font-size: 1em;
   margin: 0 auto 40px;
-  color: #9B9B9B;
+  color: #9b9b9b;
   text-align: center;
 }
 
@@ -59,13 +59,21 @@ header h1 {
 */
 
 @keyframes quotes {
-  0%   { opacity: 0; }
-  50%  { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes quotes-title {
-  100%  { opacity: 1; }
+  100% {
+    opacity: 1;
+  }
 }
 
 .quote {
@@ -127,23 +135,22 @@ span.quote {
   DETAILS
 */
 
-
 .features-list {
   padding: 0 20px;
   margin-top: -20px;
   background-color: #1e2328;
-  color: #FFF;
+  color: #fff;
 }
 
 .features {
   margin: 0 auto;
-  padding: 65px 0 45px;
+  padding: 70px 0 45px;
   max-width: 840px;
   width: 100%;
 }
 
 .features .feature {
-  margin: 40px 0;
+  margin: 50px 0;
   min-height: 110px;
   overflow: hidden;
 }
@@ -188,15 +195,14 @@ span.quote {
   }
 }
 
-
 .features .feature .feature-title {
   margin: 0 0 1rem;
-  font-size: 1.3rem;
-  font-family: Montserrat,Open Sans,Lucida Grande,sans-serif;
+  font-size: 1.5rem;
+  font-family: Montserrat, Open Sans, Lucida Grande, sans-serif;
 }
 
 .features .feature .feature-text {
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.4rem;
 }
 
@@ -221,8 +227,8 @@ span.quote {
   font-size: 1em;
   font-weight: 500;
 
-  color: #FFF;
-  background-color: #CC1B00;
+  color: #fff;
+  background-color: #cc1b00;
 
   text-decoration: none;
 
@@ -230,10 +236,10 @@ span.quote {
 }
 
 .get-it {
-  background-color: #EA2001;
+  background-color: #ea2001;
 }
 .get-it:hover {
-  background-color: #CC1B00;
+  background-color: #cc1b00;
 }
 
 .github {
@@ -261,8 +267,8 @@ footer iframe {
 }
 
 .twitter-share-button {
-  min-width: 62px
- }
+  min-width: 62px;
+}
 
 .github-button {
   min-width: 80px;
@@ -282,5 +288,5 @@ footer iframe {
 
 .by a {
   text-decoration: none;
-  color: #EA2001;
+  color: #ea2001;
 }
