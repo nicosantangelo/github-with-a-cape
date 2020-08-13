@@ -7,6 +7,7 @@ body {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
+  font-size: 100%;
 }
 
 .text-center {
@@ -44,6 +45,12 @@ header h1 {
   margin: 0 auto 40px;
   color: #9b9b9b;
   text-align: center;
+}
+
+@media screen and (max-width: 762px) {
+  .description {
+    margin-bottom: 60px;
+  }
 }
 
 @media screen and (min-width: 762px) {
@@ -144,19 +151,15 @@ span.quote {
 
 .features {
   margin: 0 auto;
-  padding: 70px 0 45px;
+  padding: 80px 0 45px;
   max-width: 840px;
   width: 100%;
 }
 
 .features .feature {
-  margin: 50px 0;
+  margin-bottom: 80px;
   min-height: 110px;
   overflow: hidden;
-}
-
-.features .feature:first-child {
-  margin-top: 0;
 }
 
 .features .feature:last-child {
@@ -179,6 +182,27 @@ span.quote {
   float: left;
 }
 
+.features .feature .feature-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-family: Montserrat, Open Sans, Lucida Grande, sans-serif;
+}
+
+.features .feature .feature-text {
+  font-size: 1rem;
+  line-height: 1.4rem;
+}
+
+@media screen and (max-width: 762px) {
+  .features-list {
+    margin-top: 0;
+  }
+
+  .features .feature {
+    margin-bottom: 80px;
+  }
+}
+
 @media screen and (min-width: 762px) {
   .features .feature .feature-img {
     width: 50%;
@@ -195,17 +219,6 @@ span.quote {
   }
 }
 
-.features .feature .feature-title {
-  margin: 0 0 1rem;
-  font-size: 1.5rem;
-  font-family: Montserrat, Open Sans, Lucida Grande, sans-serif;
-}
-
-.features .feature .feature-text {
-  font-size: 1rem;
-  line-height: 1.4rem;
-}
-
 /*
   ACTIONS
 */
@@ -214,7 +227,7 @@ span.quote {
 }
 
 .actions > a {
-  width: 250px;
+  padding: 0 10px;
   position: relative;
 }
 
@@ -248,6 +261,12 @@ span.quote {
 }
 .github:hover {
   color: #000;
+}
+
+@media screen and (min-width: 270px) {
+  .actions > a {
+    width: 250px;
+  }
 }
 
 /*
